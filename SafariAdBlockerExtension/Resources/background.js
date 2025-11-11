@@ -1,44 +1,35 @@
-// Background script
+console.log('🟢 [BACKGROUND] Extension starting...');
 
-console.log('🟢 [BACKGROUND] Extension background script starting...');
+function logToNative(message, type = 'info') {
+    console.log(message);
+    
+    try {
+        browser.runtime.sendNativeMessage('application.id', {
+            action: 'log',
+            message: message,
+            type: type,
+            timestamp: new Date().toISOString()
+        }).catch(() => {
+            if (browser.runtime.sendMessage) {
+                browser.runtime.sendMessage({
+                    action: 'logToNative',
+                    message: message,
+                    type: type
+                }).catch(() => {});
+            }
+        });
+    } catch (error) {
 
-// Log when extension is installed or updated
-browser.runtime.onInstalled.addListener((details) => {
-    console.log('🔧 [BACKGROUND] Extension installed/updated:', details.reason);
-    if (details.reason === 'install') {
-        console.log('✨ [BACKGROUND] First time installation');
-    } else if (details.reason === 'update') {
-        console.log('🔄 [BACKGROUND] Extension updated');
     }
-});
-
-// Log when extension starts up
-browser.runtime.onStartup.addListener(() => {
-    console.log('🚀 [BACKGROUND] Extension startup event fired');
-});
+}
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("📩 [BACKGROUND] Received request:", request);
-    console.log("📍 [BACKGROUND] Sender:", sender);
-
-    if (request.greeting === "hello") {
-        console.log("👋 [BACKGROUND] Responding to hello message");
-        return Promise.resolve({ farewell: "goodbye" });
+    if (request.action === 'log' || request.action === 'logToNative') {
+        logToNative(request.message, request.type);
+        sendResponse({ success: true });
     }
     
-    // Log ad blocking events from content script
-    if (request.action === 'adBlocked') {
-        console.log(`🚫 [BACKGROUND] Ad blocked: ${request.type}, Total: ${request.count}`);
-    }
-    
-    if (request.action === 'adSkipped') {
-        console.log(`⏭️ [BACKGROUND] Ad skipped: Total: ${request.count}`);
-    }
+    return true;
 });
 
-// error handling
-self.addEventListener('error', (event) => {
-    console.error('❌ [BACKGROUND] Error in background script:', event.error);
-});
-
-console.log('✅ [BACKGROUND] Background script fully loaded and ready');
+logToNative('✅ Extension loaded', 'success');

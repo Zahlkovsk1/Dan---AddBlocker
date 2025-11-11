@@ -6,7 +6,8 @@
   "permissions": [
     "webNavigation",
     "storage",
-    "declarativeNetRequest"
+    "declarativeNetRequest",
+    "nativeMessaging"
   ],
   "host_permissions": [
     "*://*.youtube.com/*",

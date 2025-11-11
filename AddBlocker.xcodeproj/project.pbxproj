@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6C7E6B032EC3327C003A1DB8 /* SafariAdBlockerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6C979EEE2EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
+		6C979EEF2EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
+		6C979EF02EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
 		6CA8E2252EC2472C00C537CC /* AdBlockerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariAdBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C979EED2EC376A000A11250 /* SharedLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLogger.swift; sourceTree = "<group>"; };
 		6CA8E2072EC246CC00C537CC /* AddBlocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddBlocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,6 +126,7 @@
 		6CA8E1FE2EC246CC00C537CC = {
 			isa = PBXGroup;
 			children = (
+				6C979EED2EC376A000A11250 /* SharedLogger.swift */,
 				6CA8E2092EC246CC00C537CC /* AddBlocker */,
 				6CA8E21D2EC2472C00C537CC /* AdBlockerExtension */,
 				6C7E6AEC2EC3327C003A1DB8 /* SafariAdBlockerExtension */,
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C979EF02EC376A000A11250 /* SharedLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C979EEF2EC376A000A11250 /* SharedLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C979EEE2EC376A000A11250 /* SharedLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +326,7 @@
 		6C7E6B042EC3327C003A1DB8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SafariAdBlockerExtension/SafariAdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NNZWWH5M7V;
@@ -348,6 +357,7 @@
 		6C7E6B052EC3327C003A1DB8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = SafariAdBlockerExtension/SafariAdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NNZWWH5M7V;
@@ -499,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AddBlocker/AddBlocker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AddBlocker/Preview Content\"";
@@ -528,6 +539,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AddBlocker/AddBlocker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AddBlocker/Preview Content\"";
@@ -556,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = AdBlockerExtension/AdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NNZWWH5M7V;
@@ -582,6 +595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_ENTITLEMENTS = AdBlockerExtension/AdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NNZWWH5M7V;

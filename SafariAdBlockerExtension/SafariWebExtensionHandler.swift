@@ -4,7 +4,6 @@
 //
 //  Created by Gabons on 11/11/25.
 //
-
 import SafariServices
 import os.log
 
@@ -27,7 +26,20 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             message = request?.userInfo?["message"]
         }
 
-        os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@ (profile: %@)", String(describing: message), profile?.uuidString ?? "none")
+        os_log(.default, "Received message: %@", String(describing: message))
+        
+        if let messageDict = message as? [String: Any],
+           let action = messageDict["action"] as? String {
+            
+            if action == "log" || action == "logToNative" {
+                let logMessage = messageDict["message"] as? String ?? "Unknown message"
+                let logType = messageDict["type"] as? String ?? "info"
+                
+                SharedLogger.shared.log(logMessage, type: logType, source: "extension")
+                
+                os_log(.default, "Logged: %@", logMessage)
+            }
+        }
 
         let response = NSExtensionItem()
         if #available(iOS 15.0, macOS 11.0, *) {
@@ -38,5 +50,4 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
         context.completeRequest(returningItems: [ response ], completionHandler: nil)
     }
-
 }

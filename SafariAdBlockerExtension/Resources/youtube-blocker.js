@@ -1,10 +1,27 @@
-// YouTube Mobile Ad Blocker 
+// YouTube Mobile Ad Blocker
+
 (function() {
     'use strict';
     
-    console.log('═══════════════════════════════════════════════');
-    console.log('🚀 [CONTENT] YouTube Mobile AdBlocker loading...');
-    console.log('═══════════════════════════════════════════════');
+   
+    function logToApp(message, type = 'info') {
+        console.log(message);
+        
+        try {
+            if (browser?.runtime?.sendMessage) {
+                browser.runtime.sendMessage({
+                    action: 'log',
+                    message: message,
+                    type: type,
+                    timestamp: new Date().toISOString()
+                }).catch(() => {});
+            }
+        } catch (error) {
+           
+        }
+    }
+    
+    logToApp('🚀 AdBlocker Active', 'success');
     
     let adStats = {
         adsSkipped: 0,
@@ -18,8 +35,7 @@
     let isProcessingMultipleAds = false;
     let ensurePlaybackInterval = null;
     let lastTransitionSkip = 0;
-    
-    // Minimal CSS
+  
     try {
         const style = document.createElement('style');
         style.textContent = `
@@ -32,12 +48,10 @@
             }
         `;
         document.head.appendChild(style);
-        console.log('✅ [CONTENT] CSS injected');
     } catch (error) {
-        console.error('❌ [CONTENT] CSS error:', error);
+        logToApp('Failed to inject ad blocker styles', 'error');
     }
     
-    // Simulate real click
     function realClick(element) {
         if (!element) return false;
         
@@ -90,13 +104,11 @@
         return !!(adText || adBadge || adModule);
     }
     
-    // Check for the transition/loading skip button
     function checkTransitionSkipButton() {
         const now = Date.now();
         
         if (now - lastTransitionSkip < 500) return;
         
-        // Look for various skip button selectors that might appear during transition
         const transitionSkipSelectors = [
             '.ytp-ad-skip-button-slot',
             '.ytp-ad-skip-button-container',
@@ -110,18 +122,13 @@
         for (const selector of transitionSkipSelectors) {
             const skipBtn = document.querySelector(selector);
             
-            // Check if button exists and is visible
             if (skipBtn && skipBtn.offsetParent !== null) {
-                // Check if it's not disabled
                 if (!skipBtn.disabled && !skipBtn.classList.contains('ytp-ad-skip-button-disabled')) {
-                    console.log(`🔘 [CONTENT] Transition skip button found: ${selector}`);
-                    
                     if (realClick(skipBtn)) {
                         adStats.transitionSkips++;
                         lastTransitionSkip = now;
-                        console.log(`⚡ [CONTENT] Transition skip clicked! Total: ${adStats.transitionSkips}`);
+                        logToApp(`⚡ Ad sequence skipped (Total: ${adStats.transitionSkips})`, 'success');
                         
-                        // Force video start after transition skip
                         setTimeout(forceVideoStart, 200);
                         return true;
                     }
@@ -132,7 +139,6 @@
         return false;
     }
     
-    // Check if this is part of a multi-ad sequence
     function getAdSequenceInfo() {
         const adText = document.querySelector('.ytp-ad-text');
         if (!adText) return null;
@@ -149,13 +155,10 @@
         return null;
     }
     
-    // video playing continuously
     function startPlaybackGuard() {
         if (ensurePlaybackInterval) {
             clearInterval(ensurePlaybackInterval);
         }
-        
-        console.log('🛡️ [CONTENT] Starting playback guard');
         
         let guardAttempts = 0;
         const maxAttempts = 20;
@@ -169,26 +172,19 @@
             }
             
             if (player.paused && !isInAd()) {
-                console.log(`▶️ [CONTENT] Forcing playback (${guardAttempts + 1}/${maxAttempts})`);
-                
-                player.play().catch(err => {
-                    console.log('⚠️ [CONTENT] Play prevented:', err.message);
-                });
-                
+                player.play().catch(() => {});
                 realClick(player);
             }
             
             guardAttempts++;
             
             if (guardAttempts >= maxAttempts || (!player.paused && player.currentTime > 0.5)) {
-                console.log('✅ [CONTENT] Playback stabilized');
                 clearInterval(ensurePlaybackInterval);
                 ensurePlaybackInterval = null;
             }
         }, 200);
     }
     
-    // Force video to start
     function forceVideoStart() {
         const player = document.querySelector('video');
         if (!player) return;
@@ -202,36 +198,29 @@
             }
             
             player.play().then(() => {
-                console.log('▶️ [CONTENT] Video started');
                 isProcessingMultipleAds = false;
                 consecutiveAdChecks = 0;
                 startPlaybackGuard();
-            }).catch(err => {
-                console.log('⚠️ [CONTENT] Auto-play prevented:', err.message);
+            }).catch(() => {
                 startPlaybackGuard();
             });
             
             realClick(player);
             
         } catch (error) {
-            console.error('❌ [CONTENT] Video start failed:', error);
         }
     }
     
-    // Skip through the ad transition
     function skipAdTransition() {
         const player = document.querySelector('video');
         if (!player) return;
         
         try {
-            // click the transition skip button
             if (checkTransitionSkipButton()) {
-                return; // Skip button clicked, we're done
+                return;
             }
             
             if (!isInAd() && (player.paused || player.seeking)) {
-                console.log('⏩ [CONTENT] Skipping ad transition');
-                
                 player.play().catch(() => {});
                 
                 const skipButton = document.querySelector('.ytp-ad-skip-button, .ytp-ad-skip-button-modern');
@@ -242,22 +231,19 @@
                 setTimeout(forceVideoStart, 50);
             }
         } catch (error) {
-            console.error('❌ [CONTENT] Transition skip error:', error);
         }
     }
     
-    // Main ad handling
     function handleAd() {
         try {
             const now = Date.now();
             const inAd = isInAd();
             const adInfo = getAdSequenceInfo();
             
-            // check for transition skip button
             checkTransitionSkipButton();
             
-            if (adInfo) {
-                console.log(`📺 [CONTENT] Ad ${adInfo.current} of ${adInfo.total}`);
+            if (adInfo && adInfo.current === 1) {
+                logToApp(`📺 ${adInfo.total} ads detected`, 'info');
                 isProcessingMultipleAds = true;
             }
             
@@ -265,11 +251,11 @@
                 consecutiveAdChecks++;
                 
                 if (consecutiveAdChecks < 10) {
-                    console.log(`🔄 [CONTENT] Checking for next ad... (${consecutiveAdChecks}/10)`);
                     skipAdTransition();
                     return;
                 } else {
-                    console.log('🎬 [CONTENT] All ads done!');
+    
+                    logToApp('✅ Video started', 'success');
                     forceVideoStart();
                     wasInAd = false;
                     consecutiveAdChecks = 0;
@@ -292,7 +278,6 @@
             
             if (now - lastAction < 300) return;
             
-            // Try regular skip button
             const skipSelectors = [
                 '.ytp-ad-skip-button',
                 '.ytp-ad-skip-button-modern',
@@ -307,7 +292,7 @@
                     if (realClick(skipButton)) {
                         adStats.adsSkipped++;
                         lastAction = now;
-                        console.log(`⏭️ [CONTENT] Skip clicked! Total: ${adStats.adsSkipped}`);
+                        logToApp(`⏭️ Ad skipped (Total: ${adStats.adsSkipped})`, 'success');
                         
                         if (!adInfo || adInfo.current === adInfo.total) {
                             setTimeout(forceVideoStart, 100);
@@ -317,7 +302,6 @@
                 }
             }
             
-            // Fast-forward ad
             const player = document.querySelector('video');
             if (player && player.duration > 0) {
                 const remaining = player.duration - player.currentTime;
@@ -328,7 +312,7 @@
                     player.muted = true;
                     adStats.adsFastForwarded++;
                     lastAction = now;
-                    console.log(`🚫 [CONTENT] Ad fast-forwarded! Total: ${adStats.adsFastForwarded}`);
+                    logToApp(`🚫 Ad blocked (Total: ${adStats.adsFastForwarded})`, 'success');
                     
                     setTimeout(() => {
                         player.playbackRate = 1;
@@ -339,17 +323,18 @@
                 }
             }
         } catch (error) {
-            console.error('❌ [CONTENT] Error:', error);
+          
+            if (error.message.includes('critical')) {
+                logToApp('Error: ' + error.message, 'error');
+            }
         }
     }
     
-    // Listen for pause events
     document.addEventListener('DOMContentLoaded', () => {
         const player = document.querySelector('video');
         if (player) {
             player.addEventListener('pause', () => {
                 if (!isInAd() && player.currentTime < 5) {
-                    console.log('🔄 [CONTENT] Auto-pause detected - resuming');
                     setTimeout(() => {
                         if (!isInAd()) {
                             player.play();
@@ -362,14 +347,10 @@
     
     setInterval(handleAd, 150);
     
-    // DOM changes
     const observer = new MutationObserver(handleAd);
     observer.observe(document.body, {
         childList: true,
         subtree: true
     });
-    
-    console.log('✅ [CONTENT] AdBlocker initialized');
-    console.log('═══════════════════════════════════════════════');
     
 })();
