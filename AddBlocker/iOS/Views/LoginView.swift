@@ -18,7 +18,7 @@ struct LoginView: View {
                 
                 VStack(spacing: 0) {
                     Spacer()
-                   // DNAHelixView()
+                    ShieldAnimationView()
                         .padding()
                     Spacer()
                     Text("Set Up Account to Save\nYour Progress")
@@ -28,7 +28,7 @@ struct LoginView: View {
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 8)
                     
-                    Text("Sign in or register to use your BioAge collections \n on multiple devices, and save your progress on cloud")
+                    Text("Sign in or register to use your YBlocker \n on multiple devices, and save your progress on cloud")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
