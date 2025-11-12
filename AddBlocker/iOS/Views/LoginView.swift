@@ -11,138 +11,186 @@ import GoogleSignInSwift
 struct LoginView: View {
     @Environment(AppState.self) private var appState
     @State var viewModel: AuthViewModel
+    
     var body: some View {
         NavigationStack {
-            
             ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(white: 0.08),
+                        Color(white: 0.12),
+                        Color(white: 0.08)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
                 
-                VStack(spacing: 0) {
-                    Spacer()
-                    ShieldAnimationView()
-                        .padding()
-                    Spacer()
-                    Text("Set Up Account to Save\nYour Progress")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 8)
-                    
-                    Text("Sign in or register to use your YBlocker \n on multiple devices, and save your progress on cloud")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 40)
-                    
-                    TextField("Email", text: $viewModel.userEmail)
-                        .keyboardType(.emailAddress)
-                        .textContentType(.username)
-                        .disableAutocorrection(true)
-                        .textInputAutocapitalization(.never)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                        .padding(.bottom, 12)
-                    
-                    SecureField("Password", text: $viewModel.userPassword)
-                        .textContentType(.password)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                        .padding(.bottom, 24)
-                    
-                    Button(action: {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Spacer()
+                            .frame(height: 60)
                         
-                    }) {
-                        HStack {
-                            Image(systemName: "apple.logo")
-                            Text("Sign in with Apple")
-                                .fontWeight(.semibold)
+                        ShieldAnimationView()
+                            .padding(.bottom, 40)
+                        
+                        VStack(spacing: 12) {
+                            Text("Set Up Account to Save")
+                                .font(.system(size: 28, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                            
+                            Text("Your Progress")
+                                .font(.system(size: 28, weight: .bold, design: .rounded))
+                                .foregroundColor(.white.opacity(0.9))
                         }
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 12)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 16)
+                        
+                        Text("Sign in or register to use AdBlocker\non multiple devices")
+                            .font(.system(size: 15, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 40)
                     
-                    // Sign in with Google Button
-                    Button(action: {
-                        viewModel.handleGoogleSignInButtonTapped()
-                    }) {
-                        HStack {
-                            Image("google-icon")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            Text("Sign in with Google")
-                                .fontWeight(.semibold)
+                        TextField("", text: $viewModel.userEmail, prompt: Text("Email").foregroundColor(.white.opacity(0.5)))
+                            .keyboardType(.emailAddress)
+                            .textContentType(.username)
+                            .disableAutocorrection(true)
+                            .textInputAutocapitalization(.never)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.08))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.15), lineWidth: 1)
+                                    )
+                            )
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 12)
+                        
+                        SecureField("", text: $viewModel.userPassword, prompt: Text("Password").foregroundColor(.white.opacity(0.5)))
+                            .textContentType(.password)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.08))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.15), lineWidth: 1)
+                                    )
+                            )
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 24)
+                        
+                        Button(action: {
+                            // TODO: Apple Sign In
+                        }) {
+                            HStack(spacing: 10) {
+                                Image(systemName: "apple.logo")
+                                    .font(.system(size: 18))
+                                Text("Sign in with Apple")
+                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            }
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                            )
                         }
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(.systemGray5).opacity(0.3))
-                        .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 12)
-                    
-                    Button(action: {
-                        viewModel.handleSingInButtonTapped()
-                    }) {
-                        Text("Sign-in with mail")
-                            .fontWeight(.semibold)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 12)
+                        
+                        Button(action: {
+                            viewModel.handleGoogleSignInButtonTapped()
+                        }) {
+                            HStack(spacing: 10) {
+                                Image("google-icon")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                Text("Sign in with Google")
+                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(.systemGray5).opacity(0.3))
-                            .cornerRadius(12)
+                            .padding(.vertical, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.12))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.2), lineWidth: 1)
+                                    )
+                            )
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 12)
+                        
+                     
+                        Button(action: {
+                            viewModel.handleSingInButtonTapped()
+                        }) {
+                            Text("Sign in with Email")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(.white.opacity(0.12))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(.white.opacity(0.2), lineWidth: 1)
+                                        )
+                                )
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 12)
+                        .disabled(viewModel.isLoading || !viewModel.isValid)
+                        .opacity((viewModel.isLoading || !viewModel.isValid) ? 0.5 : 1)
+                  
+                        Button(action: {
+                            viewModel.showSignUp = true
+                        }) {
+                            Text("Register")
+                                .font(.system(size: 16, weight: .medium, design: .rounded))
+                                .foregroundColor(.white.opacity(0.7))
+                        }
+                        .padding(.top, 12)
+                        
+                        Spacer()
+                            .frame(height: 60)
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 12)
-                    .disabled(viewModel.isLoading || !viewModel.isValid)
-                    .alert("Login Failed", isPresented: $viewModel.isShowingAllert, actions: {
-                        Button("OK", role: .cancel) {}
-                    }, message: {
-                        Text(viewModel.alertMessage)
-                    })
-                    
-                    Button(action: {
-                        viewModel.showSignUp = true  // Trigger navigation
-                        // viewModel.handleSingUpButtonTapped()
-                    }) {
-                        Text("Register")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.clear)
-                            .cornerRadius(12)
-                    }
-                    .padding(.horizontal)
-                    
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.black)
-                .navigationBarHidden(true)
-                .navigationDestination(isPresented: $viewModel.showSignUp) {
-                    SignUpView(viewModel: viewModel)
                 }
                 
                 if viewModel.isLoading {
-                    ProgressView().opacity(0.7)
+                    ZStack {
+                        Color.black.opacity(0.3)
+                            .ignoresSafeArea()
+                        
+                        ProgressView()
+                            .tint(.white)
+                            .scaleEffect(1.2)
+                    }
                 }
-                
             }
-            
+            .navigationBarHidden(true)
+            .navigationDestination(isPresented: $viewModel.showSignUp) {
+                SignUpView(viewModel: viewModel)
+            }
+            .alert("Login Failed", isPresented: $viewModel.isShowingAllert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(viewModel.alertMessage)
+            }
         }
     }
 }
+
 struct SignUpView: View {
     @Bindable var viewModel: AuthViewModel
     var body: some View {
