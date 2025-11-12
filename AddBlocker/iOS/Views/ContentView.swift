@@ -22,6 +22,11 @@ struct ContentView: View {
                     Label("Logs", systemImage: "chart.bar.fill")
                 }
                 .tag(1)
+            SettingsView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.circle.fill")
+                }
+                .tag(2)
         }
         .accentColor(.white)
         .preferredColorScheme(.dark)
