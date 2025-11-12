@@ -24,6 +24,7 @@ struct ContentView: View {
                 .tag(1)
         }
         .accentColor(.white)
+        .preferredColorScheme(.dark)
     }
 }
 
@@ -43,12 +44,9 @@ struct HomeView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
-            
+        
             ScrollView {
                 VStack(spacing: 32) {
-                    Spacer()
-                        .frame(height: 40)
-                    
                     ZStack {
                         Circle()
                             .fill(.white.opacity(0.05))
@@ -63,6 +61,7 @@ struct HomeView: View {
                             .font(.system(size: 50))
                             .foregroundColor(.white.opacity(0.95))
                     }
+                    .padding(.top, 20) // Add padding instead of Spacer
                     .onAppear {
                         withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
                             isAnimating = true
@@ -79,7 +78,6 @@ struct HomeView: View {
                             .foregroundColor(.white.opacity(0.6))
                     }
                     
-                    // Feature Cards
                     VStack(spacing: 16) {
                         FeatureCard(
                             icon: "bolt.fill",
@@ -151,8 +149,9 @@ struct HomeView: View {
                     )
                     .padding(.horizontal, 20)
                     
+                    // Bottom padding for tab bar
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 20)
                 }
             }
         }
@@ -164,6 +163,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 // MARK: - Feature Card
 struct FeatureCard: View {

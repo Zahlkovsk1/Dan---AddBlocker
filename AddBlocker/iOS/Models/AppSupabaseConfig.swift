@@ -9,9 +9,9 @@ import Foundation
 import Supabase
 
 struct AppSupabaseConfig {
-    static let url = URL(string: "https://ebgasqvrezvfouyssqnv.supabase.co")!
-    static let anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViZ2FzcXZyZXp2Zm91eXNzcW52Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg2MzEzNjQsImV4cCI6MjA3NDIwNzM2NH0.8vFzcDNl9dXhJ0cILDFbZApp8Oq5IvSZC7VLxyrAq5w"
-    static let base = "ebgasqvrezvfouyssqnv"
+    static let url = URL(string: "https://lawnvwgaigkcezpesvfp.supabase.co")!
+    static let anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxhd252d2dhaWdrY2V6cGVzdmZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5MzIzMjksImV4cCI6MjA3ODUwODMyOX0.dfguy1FazCeiOYmac75Qfn8VdVZCXtFBXZVfToh1g5g"
+    static let base = "lawnvwgaigkcezpesvfp"
 }
 
 extension SupabaseClient {

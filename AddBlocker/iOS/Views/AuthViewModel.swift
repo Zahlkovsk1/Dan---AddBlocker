@@ -4,8 +4,6 @@
 //
 //  Created by Gabons on 12/11/25.
 //
-
-
 import SwiftUI
 import Supabase
 import GoogleSignIn
