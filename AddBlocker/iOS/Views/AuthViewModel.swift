@@ -122,7 +122,7 @@ final class AuthViewModel  {
                 throw NSError(domain: "No view controller available", code: -1)
             }
             
-            let config = GIDConfiguration(clientID: "561478665315-amhpaq9hq281k1anmmhh1uiv099feu3f.apps.googleusercontent.com")
+            let config = GIDConfiguration(clientID: "724413132648-2us3goprlm4n3611lq7klqjceei1jqld.apps.googleusercontent.com")
             GIDSignIn.sharedInstance.configuration = config
             
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)

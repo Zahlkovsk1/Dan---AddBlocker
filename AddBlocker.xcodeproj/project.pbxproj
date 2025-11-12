@@ -68,6 +68,13 @@
 			);
 			target = 6C7E6AEA2EC3327C003A1DB8 /* SafariAdBlockerExtension */;
 		};
+		6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "AddBlocker" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6CA8E2062EC246CC00C537CC /* AddBlocker */;
+		};
 		6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "AdBlockerExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -92,6 +99,9 @@
 		};
 		6CA8E2092EC246CC00C537CC /* AddBlocker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "AddBlocker" target */,
+			);
 			path = AddBlocker;
 			sourceTree = "<group>";
 		};
@@ -549,6 +559,7 @@
 				DEVELOPMENT_TEAM = NNZWWH5M7V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AddBlocker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -579,6 +590,7 @@
 				DEVELOPMENT_TEAM = NNZWWH5M7V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AddBlocker/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
