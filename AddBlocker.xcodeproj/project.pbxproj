@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C7E6B032EC3327C003A1DB8 /* SafariAdBlockerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6C7E6B032EC3327C003A1DB8 /* YBlocker Youtube.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6C7E6AEB2EC3327C003A1DB8 /* YBlocker Youtube.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6C979EEE2EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
 		6C979EEF2EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
 		6C979EF02EC376A000A11250 /* SharedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C979EED2EC376A000A11250 /* SharedLogger.swift */; };
@@ -18,7 +18,7 @@
 		6C979FCE2EC4842100A11250 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FCD2EC4842100A11250 /* Supabase */; };
 		6C979FD12EC4845B00A11250 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FD02EC4845B00A11250 /* GoogleSignIn */; };
 		6C979FD32EC4845B00A11250 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FD22EC4845B00A11250 /* GoogleSignInSwift */; };
-		6CA8E2252EC2472C00C537CC /* AdBlockerExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6CA8E2252EC2472C00C537CC /* YBlocker.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6CA8E21C2EC2472C00C537CC /* YBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6C7E6B032EC3327C003A1DB8 /* SafariAdBlockerExtension.appex in Embed Foundation Extensions */,
-				6CA8E2252EC2472C00C537CC /* AdBlockerExtension.appex in Embed Foundation Extensions */,
+				6C7E6B032EC3327C003A1DB8 /* YBlocker Youtube.appex in Embed Foundation Extensions */,
+				6CA8E2252EC2472C00C537CC /* YBlocker.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,33 +54,33 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariAdBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C7E6AEB2EC3327C003A1DB8 /* YBlocker Youtube.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "YBlocker Youtube.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C979EED2EC376A000A11250 /* SharedLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLogger.swift; sourceTree = "<group>"; };
-		6CA8E2072EC246CC00C537CC /* AddBlocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddBlocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA8E2072EC246CC00C537CC /* YBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CA8E21C2EC2472C00C537CC /* YBlocker.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YBlocker.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6C7E6B062EC3327C003A1DB8 /* Exceptions for "SafariAdBlockerExtension" folder in "SafariAdBlockerExtension" target */ = {
+		6C7E6B062EC3327C003A1DB8 /* Exceptions for "SafariAdBlockerExtension" folder in "YBlocker Youtube" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 6C7E6AEA2EC3327C003A1DB8 /* SafariAdBlockerExtension */;
+			target = 6C7E6AEA2EC3327C003A1DB8 /* YBlocker Youtube */;
 		};
-		6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "AddBlocker" target */ = {
+		6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "YBlock" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 6CA8E2062EC246CC00C537CC /* AddBlocker */;
+			target = 6CA8E2062EC246CC00C537CC /* YBlock */;
 		};
-		6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "AdBlockerExtension" target */ = {
+		6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "YBlocker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 6CA8E21B2EC2472C00C537CC /* AdBlockerExtension */;
+			target = 6CA8E21B2EC2472C00C537CC /* YBlocker */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -88,7 +88,7 @@
 		6C7E6AEC2EC3327C003A1DB8 /* SafariAdBlockerExtension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6C7E6B062EC3327C003A1DB8 /* Exceptions for "SafariAdBlockerExtension" folder in "SafariAdBlockerExtension" target */,
+				6C7E6B062EC3327C003A1DB8 /* Exceptions for "SafariAdBlockerExtension" folder in "YBlocker Youtube" target */,
 			);
 			explicitFolders = (
 				Resources/_locales,
@@ -100,7 +100,7 @@
 		6CA8E2092EC246CC00C537CC /* AddBlocker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "AddBlocker" target */,
+				6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "YBlock" target */,
 			);
 			path = AddBlocker;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 		6CA8E21D2EC2472C00C537CC /* AdBlockerExtension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "AdBlockerExtension" target */,
+				6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "YBlocker" target */,
 			);
 			path = AdBlockerExtension;
 			sourceTree = "<group>";
@@ -169,9 +169,9 @@
 		6CA8E2082EC246CC00C537CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6CA8E2072EC246CC00C537CC /* AddBlocker.app */,
-				6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */,
-				6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */,
+				6CA8E2072EC246CC00C537CC /* YBlock.app */,
+				6CA8E21C2EC2472C00C537CC /* YBlocker.appex */,
+				6C7E6AEB2EC3327C003A1DB8 /* YBlocker Youtube.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,9 +179,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6C7E6AEA2EC3327C003A1DB8 /* SafariAdBlockerExtension */ = {
+		6C7E6AEA2EC3327C003A1DB8 /* YBlocker Youtube */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6C7E6B072EC3327C003A1DB8 /* Build configuration list for PBXNativeTarget "SafariAdBlockerExtension" */;
+			buildConfigurationList = 6C7E6B072EC3327C003A1DB8 /* Build configuration list for PBXNativeTarget "YBlocker Youtube" */;
 			buildPhases = (
 				6C7E6AE72EC3327C003A1DB8 /* Sources */,
 				6C7E6AE82EC3327C003A1DB8 /* Frameworks */,
@@ -194,16 +194,16 @@
 			fileSystemSynchronizedGroups = (
 				6C7E6AEC2EC3327C003A1DB8 /* SafariAdBlockerExtension */,
 			);
-			name = SafariAdBlockerExtension;
+			name = "YBlocker Youtube";
 			packageProductDependencies = (
 			);
 			productName = SafariAdBlockerExtension;
-			productReference = 6C7E6AEB2EC3327C003A1DB8 /* SafariAdBlockerExtension.appex */;
+			productReference = 6C7E6AEB2EC3327C003A1DB8 /* YBlocker Youtube.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		6CA8E2062EC246CC00C537CC /* AddBlocker */ = {
+		6CA8E2062EC246CC00C537CC /* YBlock */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6CA8E2152EC246CD00C537CC /* Build configuration list for PBXNativeTarget "AddBlocker" */;
+			buildConfigurationList = 6CA8E2152EC246CD00C537CC /* Build configuration list for PBXNativeTarget "YBlock" */;
 			buildPhases = (
 				6CA8E2032EC246CC00C537CC /* Sources */,
 				6CA8E2042EC246CC00C537CC /* Frameworks */,
@@ -219,7 +219,7 @@
 			fileSystemSynchronizedGroups = (
 				6CA8E2092EC246CC00C537CC /* AddBlocker */,
 			);
-			name = AddBlocker;
+			name = YBlock;
 			packageProductDependencies = (
 				6C979FBC2EC47B4200A11250 /* Auth */,
 				6C979FBE2EC47B4200A11250 /* Functions */,
@@ -230,12 +230,12 @@
 				6C979FD22EC4845B00A11250 /* GoogleSignInSwift */,
 			);
 			productName = AddBlocker;
-			productReference = 6CA8E2072EC246CC00C537CC /* AddBlocker.app */;
+			productReference = 6CA8E2072EC246CC00C537CC /* YBlock.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6CA8E21B2EC2472C00C537CC /* AdBlockerExtension */ = {
+		6CA8E21B2EC2472C00C537CC /* YBlocker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6CA8E2272EC2472C00C537CC /* Build configuration list for PBXNativeTarget "AdBlockerExtension" */;
+			buildConfigurationList = 6CA8E2272EC2472C00C537CC /* Build configuration list for PBXNativeTarget "YBlocker" */;
 			buildPhases = (
 				6CA8E2182EC2472C00C537CC /* Sources */,
 				6CA8E2192EC2472C00C537CC /* Frameworks */,
@@ -248,11 +248,11 @@
 			fileSystemSynchronizedGroups = (
 				6CA8E21D2EC2472C00C537CC /* AdBlockerExtension */,
 			);
-			name = AdBlockerExtension;
+			name = YBlocker;
 			packageProductDependencies = (
 			);
 			productName = AdBlockerExtension;
-			productReference = 6CA8E21C2EC2472C00C537CC /* AdBlockerExtension.appex */;
+			productReference = 6CA8E21C2EC2472C00C537CC /* YBlocker.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -294,9 +294,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6CA8E2062EC246CC00C537CC /* AddBlocker */,
-				6CA8E21B2EC2472C00C537CC /* AdBlockerExtension */,
-				6C7E6AEA2EC3327C003A1DB8 /* SafariAdBlockerExtension */,
+				6CA8E2062EC246CC00C537CC /* YBlock */,
+				6CA8E21B2EC2472C00C537CC /* YBlocker */,
+				6C7E6AEA2EC3327C003A1DB8 /* YBlocker Youtube */,
 			);
 		};
 /* End PBXProject section */
@@ -355,12 +355,12 @@
 /* Begin PBXTargetDependency section */
 		6C7E6B022EC3327C003A1DB8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6C7E6AEA2EC3327C003A1DB8 /* SafariAdBlockerExtension */;
+			target = 6C7E6AEA2EC3327C003A1DB8 /* YBlocker Youtube */;
 			targetProxy = 6C7E6B012EC3327C003A1DB8 /* PBXContainerItemProxy */;
 		};
 		6CA8E2242EC2472C00C537CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6CA8E21B2EC2472C00C537CC /* AdBlockerExtension */;
+			target = 6CA8E21B2EC2472C00C537CC /* YBlocker */;
 			targetProxy = 6CA8E2232EC2472C00C537CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -372,10 +372,10 @@
 				CODE_SIGN_ENTITLEMENTS = SafariAdBlockerExtension/SafariAdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariAdBlockerExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SafariAdBlockerExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "YBlocker Youtube";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -388,7 +388,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker.SafariAdBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBlock.SafariAdBlockerExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -403,10 +403,10 @@
 				CODE_SIGN_ENTITLEMENTS = SafariAdBlockerExtension/SafariAdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariAdBlockerExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = SafariAdBlockerExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "YBlocker Youtube";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,7 +419,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker.SafariAdBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBlock.SafariAdBlockerExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -556,7 +556,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AddBlocker/Preview Content\"";
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AddBlocker/Info.plist;
@@ -570,7 +570,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBlock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -587,7 +587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AddBlocker/Preview Content\"";
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AddBlocker/Info.plist;
@@ -601,7 +601,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBlock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -616,10 +616,10 @@
 				CODE_SIGN_ENTITLEMENTS = AdBlockerExtension/AdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AdBlockerExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AdBlockerExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "YBlocker ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -627,7 +627,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker.AdBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBllock.YBlockExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -643,10 +643,10 @@
 				CODE_SIGN_ENTITLEMENTS = AdBlockerExtension/AdBlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NNZWWH5M7V;
+				DEVELOPMENT_TEAM = SP96A7HF6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AdBlockerExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AdBlockerExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "YBlocker ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,7 +654,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.AddBlocker.AdBlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fedora.YBllock.YBlockExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -666,7 +666,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6C7E6B072EC3327C003A1DB8 /* Build configuration list for PBXNativeTarget "SafariAdBlockerExtension" */ = {
+		6C7E6B072EC3327C003A1DB8 /* Build configuration list for PBXNativeTarget "YBlocker Youtube" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6C7E6B042EC3327C003A1DB8 /* Debug */,
@@ -684,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6CA8E2152EC246CD00C537CC /* Build configuration list for PBXNativeTarget "AddBlocker" */ = {
+		6CA8E2152EC246CD00C537CC /* Build configuration list for PBXNativeTarget "YBlock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CA8E2162EC246CD00C537CC /* Debug */,
@@ -693,7 +693,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6CA8E2272EC2472C00C537CC /* Build configuration list for PBXNativeTarget "AdBlockerExtension" */ = {
+		6CA8E2272EC2472C00C537CC /* Build configuration list for PBXNativeTarget "YBlocker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6CA8E2282EC2472C00C537CC /* Debug */,

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "AdBlocker Extension",
+  "name": "YBlock Youtube",
   "version": "1.0",
   "description": "Advanced ad blocker with YouTube support",
   "permissions": [

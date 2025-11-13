@@ -36,7 +36,7 @@ struct SettingsView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
                     
-                    Text("AddBlock Premium")
+                    Text("YBlock Premium")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }

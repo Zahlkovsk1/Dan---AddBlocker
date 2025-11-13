@@ -32,10 +32,10 @@ struct ContentView: View {
         .preferredColorScheme(.dark)
     }
 }
-
 // MARK: - Home View
 struct HomeView: View {
     @State private var isAnimating = false
+    @State private var showWarning = true
     
     var body: some View {
         ZStack {
@@ -49,32 +49,21 @@ struct HomeView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
-        
+            
             ScrollView {
                 VStack(spacing: 32) {
-                    ZStack {
-                        Circle()
-                            .fill(.white.opacity(0.05))
-                            .frame(width: 140, height: 140)
-                            .scaleEffect(isAnimating ? 1.1 : 1.0)
-                        
-                        Circle()
-                            .fill(.white.opacity(0.08))
-                            .frame(width: 120, height: 120)
-                        
-                        Image(systemName: "shield.lefthalf.filled")
-                            .font(.system(size: 50))
-                            .foregroundColor(.white.opacity(0.95))
-                    }
-                    .padding(.top, 20) // Add padding instead of Spacer
-                    .onAppear {
-                        withAnimation(.easeInOut(duration: 2).repeatForever(autoreverses: true)) {
-                            isAnimating = true
-                        }
-                    }
+                    Spacer()
+                        .frame(height: 40)
                     
+                    ShieldAnimationView()
+                        .scaleEffect(showWarning ? 1.0 : 0.5)
+                        .opacity(showWarning ? 1.0 : 0)
+                    
+                    Spacer()
+                        .frame(height: 20)
+                
                     VStack(spacing: 12) {
-                        Text("AdBlocker")
+                        Text("YBlock")
                             .font(.system(size: 36, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
@@ -83,6 +72,61 @@ struct HomeView: View {
                             .foregroundColor(.white.opacity(0.6))
                     }
                     
+                    if showWarning {
+                        VStack(spacing: 16) {
+                            HStack(spacing: 12) {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.orange)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Important Reminder")
+                                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                    
+                                    Text("Safari may disable the extension when closed or updated. Make sure to re-enable it in Safari Settings.")
+                                        .font(.system(size: 13, design: .rounded))
+                                        .foregroundColor(.white.opacity(0.7))
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                                
+                                Spacer()
+                            }
+                            
+                            Button(action: openSettings) {
+                                HStack(spacing: 8) {
+                                    Image(systemName: "safari.fill")
+                                        .font(.system(size: 14))
+                                    
+                                    Text("Open Safari Settings")
+                                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                                .background(
+                                    Capsule()
+                                        .fill(.orange.opacity(0.2))
+                                        .overlay(
+                                            Capsule()
+                                                .stroke(.orange.opacity(0.4), lineWidth: 1)
+                                        )
+                                )
+                            }
+                        }
+                        .padding(20)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(.white.opacity(0.05))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(.orange.opacity(0.2), lineWidth: 1)
+                                )
+                        )
+                        .padding(.horizontal, 20)
+                    }
+                    
+                    // Feature Cards
                     VStack(spacing: 16) {
                         FeatureCard(
                             icon: "bolt.fill",
@@ -104,60 +148,14 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    VStack(spacing: 20) {
-                        VStack(spacing: 12) {
-                            Image(systemName: "gearshape.2.fill")
-                                .font(.system(size: 32))
-                                .foregroundColor(.white.opacity(0.9))
-                            
-                            Text("Setup Required")
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .foregroundColor(.white)
-                            
-                            Text("Enable extensions in Safari settings to start blocking ads")
-                                .font(.system(size: 14, design: .rounded))
-                                .foregroundColor(.white.opacity(0.6))
-                                .multilineTextAlignment(.center)
-                                .lineSpacing(4)
-                                .padding(.horizontal, 20)
-                        }
-                        
-                        Button(action: openSettings) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "safari.fill")
-                                    .font(.system(size: 16))
-                                
-                                Text("Open Safari Settings")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                            }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(
-                                Capsule()
-                                    .fill(.white.opacity(0.15))
-                                    .overlay(
-                                        Capsule()
-                                            .stroke(.white.opacity(0.25), lineWidth: 1)
-                                    )
-                            )
-                        }
-                    }
-                    .padding(24)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(.white.opacity(0.05))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.white.opacity(0.12), lineWidth: 1)
-                            )
-                    )
-                    .padding(.horizontal, 20)
-                    
-                    // Bottom padding for tab bar
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height: 40)
                 }
+            }
+        }
+        .onAppear {
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.75)) {
+                showWarning = true
             }
         }
     }
@@ -168,6 +166,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 
 // MARK: - Feature Card

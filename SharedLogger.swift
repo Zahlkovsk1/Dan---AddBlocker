@@ -8,7 +8,7 @@
 import Foundation
 class SharedLogger {
     static let shared = SharedLogger()
-    private let appGroupID = "group.com.shox.adblocker"
+    private let appGroupID = "group.com.linar.adblocker"
     private let logsKey = "extensionLogs"
     private let maxLogs = 200
     
