@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CA8E21B2EC2472C00C537CC"
-               BuildableName = "AdBlockerExtension.appex"
-               BlueprintName = "AdBlockerExtension"
+               BuildableName = "YBlocker.appex"
+               BlueprintName = "YBlocker"
                ReferencedContainer = "container:AddBlocker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -31,8 +31,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-               BuildableName = "AddBlocker.app"
-               BlueprintName = "AddBlocker"
+               BuildableName = "YBlock.app"
+               BlueprintName = "YBlock"
                ReferencedContainer = "container:AddBlocker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-            BuildableName = "AddBlocker.app"
-            BlueprintName = "AddBlocker"
+            BuildableName = "YBlock.app"
+            BlueprintName = "YBlock"
             ReferencedContainer = "container:AddBlocker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-            BuildableName = "AddBlocker.app"
-            BlueprintName = "AddBlocker"
+            BuildableName = "YBlock.app"
+            BlueprintName = "YBlock"
             ReferencedContainer = "container:AddBlocker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

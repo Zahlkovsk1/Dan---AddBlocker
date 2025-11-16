@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-               BuildableName = "AddBlocker.app"
-               BlueprintName = "AddBlocker"
+               BuildableName = "YBlock.app"
+               BlueprintName = "YBlock"
                ReferencedContainer = "container:AddBlocker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,11 +45,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-            BuildableName = "AddBlocker.app"
-            BlueprintName = "AddBlocker"
+            BuildableName = "YBlock.app"
+            BlueprintName = "YBlock"
             ReferencedContainer = "container:AddBlocker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../AddBlocker/iOS/Products.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,8 +65,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6CA8E2062EC246CC00C537CC"
-            BuildableName = "AddBlocker.app"
-            BlueprintName = "AddBlocker"
+            BuildableName = "YBlock.app"
+            BlueprintName = "YBlock"
             ReferencedContainer = "container:AddBlocker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
