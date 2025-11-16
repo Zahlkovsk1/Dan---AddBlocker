@@ -4,39 +4,46 @@
 //
 //  Created by Gabons on 12/11/25.
 //
+//
+//  OnboardingPaywallView.swift
+//  YBlock
+//
+//  Created by Gabons on 14/11/25.
+//
 
 import SwiftUI
 import StoreKit
 
-struct PaywallView: View {
+struct OnboardingPaywallView: View {
+    @State private var storeManager = StoreManager.shared
     @State private var showContent = false
     @State private var selectedPlan: SubscriptionPlan = .yearly
-    @State private var isLoading = false
-    @State private var showTerms = false
+    @State private var showError = false
+    @State private var errorMessage = ""
     
-    var onSubscribe: () -> Void
+    var onComplete: () -> Void
     
     enum SubscriptionPlan {
         case monthly, yearly
         
         var price: String {
             switch self {
-            case .monthly: return "$4.99"
-            case .yearly: return "$29.99"
+            case .monthly: return "$0.99"
+            case .yearly: return "$9.99"
             }
         }
         
         var perMonth: String {
             switch self {
-            case .monthly: return "$4.99/mo"
-            case .yearly: return "$2.49/mo"
+            case .monthly: return "$0.99/mo"
+            case .yearly: return "$0.83/mo"
             }
         }
         
         var savings: String? {
             switch self {
             case .monthly: return nil
-            case .yearly: return "Save 50%"
+            case .yearly: return "Save 16%"
             }
         }
         
@@ -101,11 +108,11 @@ struct PaywallView: View {
                             .font(.system(size: 17, weight: .medium, design: .rounded))
                             .foregroundColor(.white.opacity(0.7))
                         
-                        Text("7-Day Free Trial")
+                        Text("Premium Access")
                             .font(.system(size: 38, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
-                        Text("Then continue with a plan that fits you")
+                        Text("Block all YouTube ads instantly")
                             .font(.system(size: 15, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                             .multilineTextAlignment(.center)
@@ -183,10 +190,11 @@ struct PaywallView: View {
                     // Trial Info
                     VStack(spacing: 8) {
                         HStack(spacing: 6) {
-                            Image(systemName: "calendar")
+                            Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 13))
+                                .foregroundColor(.green)
                             
-                            Text("Free for 7 days, then \(selectedPlan.price)/\(selectedPlan == .yearly ? "year" : "month")")
+                            Text("Billed \(selectedPlan.price)/\(selectedPlan == .yearly ? "year" : "month")")
                                 .font(.system(size: 13, design: .rounded))
                         }
                         .foregroundColor(.white.opacity(0.6))
@@ -200,14 +208,14 @@ struct PaywallView: View {
                     Spacer()
                         .frame(height: 24)
                     
-                    // Start Trial Button
+                    // Subscribe Button
                     Button(action: handleSubscribe) {
                         HStack(spacing: 12) {
-                            if isLoading {
+                            if storeManager.isLoading {
                                 ProgressView()
                                     .tint(.white)
                             } else {
-                                Text("Start Free Trial")
+                                Text("Continue")
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                                 
                                 Image(systemName: "arrow.right")
@@ -226,7 +234,7 @@ struct PaywallView: View {
                                 )
                         )
                     }
-                    .disabled(isLoading)
+                    .disabled(storeManager.isLoading || storeManager.monthlyProduct == nil)
                     .padding(.horizontal, 24)
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.9)
@@ -255,7 +263,12 @@ struct PaywallView: View {
                             .foregroundColor(.white.opacity(0.3))
                         
                         Button("Restore") {
-                            // Restore purchases
+                            Task {
+                                await storeManager.restorePurchases()
+                                if storeManager.isPremium {
+                                    onComplete()
+                                }
+                            }
                         }
                         .font(.system(size: 12, design: .rounded))
                         .foregroundColor(.white.opacity(0.5))
@@ -267,6 +280,11 @@ struct PaywallView: View {
                 }
             }
         }
+        .alert("Purchase Error", isPresented: $showError) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
         .onAppear {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.75).delay(0.1)) {
                 showContent = true
@@ -275,20 +293,24 @@ struct PaywallView: View {
     }
     
     func handleSubscribe() {
-        isLoading = true
-        
-        // TODO: Implement actual StoreKit subscription
-        // For now, just simulate
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            isLoading = false
-            onSubscribe()
+        Task {
+            do {
+                // Both options purchase the same monthly subscription
+                let success = try await storeManager.purchase()
+                if success {
+                    onComplete()
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+                showError = true
+            }
         }
     }
 }
 
 // MARK: - Plan Card
 struct PlanCard: View {
-    let plan: PaywallView.SubscriptionPlan
+    let plan: OnboardingPaywallView.SubscriptionPlan
     let isSelected: Bool
     let action: () -> Void
     
@@ -373,10 +395,3 @@ struct IncludedFeature: View {
         }
     }
 }
-
-#Preview {
-    PaywallView {
-        print("Subscribed!")
-    }
-}
-

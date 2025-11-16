@@ -48,7 +48,7 @@ struct OnboardingFlow: View {
                 ))
                 
             case 3:
-                PaywallView {
+                OnboardingPaywallView {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                         hasCompletedOnboarding = true
                     }
