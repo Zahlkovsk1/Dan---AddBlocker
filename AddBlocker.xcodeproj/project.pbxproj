@@ -18,6 +18,7 @@
 		6C979FCE2EC4842100A11250 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FCD2EC4842100A11250 /* Supabase */; };
 		6C979FD12EC4845B00A11250 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FD02EC4845B00A11250 /* GoogleSignIn */; };
 		6C979FD32EC4845B00A11250 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FD22EC4845B00A11250 /* GoogleSignInSwift */; };
+		6C97A1742ECA616400A11250 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6C97A1732ECA616400A11250 /* Localizable.xcstrings */; };
 		6CA8E2252EC2472C00C537CC /* YBlocker.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6CA8E21C2EC2472C00C537CC /* YBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		6C7E6AEB2EC3327C003A1DB8 /* YBlocker Youtube.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "YBlocker Youtube.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C979EED2EC376A000A11250 /* SharedLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLogger.swift; sourceTree = "<group>"; };
+		6C97A1732ECA616400A11250 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6CA8E2072EC246CC00C537CC /* YBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA8E21C2EC2472C00C537CC /* YBlocker.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YBlocker.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 		6CA8E1FE2EC246CC00C537CC = {
 			isa = PBXGroup;
 			children = (
+				6C97A1732ECA616400A11250 /* Localizable.xcstrings */,
 				6C979EED2EC376A000A11250 /* SharedLogger.swift */,
 				6CA8E2092EC246CC00C537CC /* AddBlocker */,
 				6CA8E21D2EC2472C00C537CC /* AdBlockerExtension */,
@@ -282,6 +285,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 6CA8E1FE2EC246CC00C537CC;
 			minimizedProjectReferenceProxies = 1;
@@ -313,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C97A1742ECA616400A11250 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +492,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -543,6 +549,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -3,15 +3,7 @@
 //  YBlock
 //
 //  Created by Gabons on 14/11/25.
-//
-//
-//  StoreManager.swift
 
-//  StoreManager.swift
-//  YBlock
-//
-//  Created by Gabons on 14/11/25.
-//
 import StoreKit
 import SwiftUI
 
@@ -19,11 +11,11 @@ import SwiftUI
 final class StoreManager {
     static let shared = StoreManager()
     
-    // Only one product ID
     private let monthlyProductID = "com.fedora.YBlock.premium.monthly"
+    private let yearlyProductID = "com.fedora.YBlock.premium.annual"
     
-    // Single product
     @MainActor var monthlyProduct: Product?
+    @MainActor var yearlyProduct: Product?
     @MainActor var isPremium: Bool = false
     @MainActor var isLoading = false
     
@@ -47,18 +39,26 @@ final class StoreManager {
     @MainActor
     func loadProducts() async {
         do {
-            let products = try await Product.products(for: [monthlyProductID])
-            monthlyProduct = products.first
-            print("✅ Loaded product: \(monthlyProduct?.displayName ?? "none")")
+            print("🔍 Requesting products: [\(monthlyProductID), \(yearlyProductID)]")
+            let products = try await Product.products(for: [monthlyProductID, yearlyProductID])
+            print("📦 Products returned: \(products.count)")
+            
+            for product in products {
+                if product.id == monthlyProductID {
+                    monthlyProduct = product
+                    print("✅ Loaded monthly: \(product.displayName) - \(product.displayPrice)")
+                } else if product.id == yearlyProductID {
+                    yearlyProduct = product
+                    print("✅ Loaded yearly: \(product.displayName) - \(product.displayPrice)")
+                }
+            }
         } catch {
-            print("❌ Failed to load product: \(error)")
+            print("❌ Failed to load products: \(error)")
         }
     }
     
     @MainActor
-    func purchase() async throws -> Bool {
-        guard let product = monthlyProduct else { return false }
-        
+    func purchase(_ product: Product) async throws -> Bool {
         isLoading = true
         defer { isLoading = false }
         
@@ -95,7 +95,9 @@ final class StoreManager {
         
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result {
-                if transaction.productID == monthlyProductID {
+                // both product IDs
+                if transaction.productID == monthlyProductID ||
+                   transaction.productID == yearlyProductID {
                     isActive = true
                     break
                 }
@@ -128,4 +130,5 @@ final class StoreManager {
         case failedVerification
     }
 }
+
 

@@ -51,7 +51,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../AddBlocker/iOS/Products.storekit">
+         identifier = "../../AddBlocker/iOS/subs.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
