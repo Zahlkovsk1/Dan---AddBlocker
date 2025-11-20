@@ -280,6 +280,8 @@ struct OnboardingPaywallView: View {
     }
     
     func handleSubscribe() {
+        print("🛒 Purchase started for: \(selectedPlan.title)")
+        
         Task {
             do {
                 let productToPurchase: Product?
@@ -287,26 +289,38 @@ struct OnboardingPaywallView: View {
                 switch selectedPlan {
                 case .monthly:
                     productToPurchase = storeManager.monthlyProduct
+                    print("📦 Purchasing monthly: \(productToPurchase?.displayName ?? "NIL")")
                 case .yearly:
                     productToPurchase = storeManager.yearlyProduct
+                    print("📦 Purchasing yearly: \(productToPurchase?.displayName ?? "NIL")")
                 }
                 
                 guard let product = productToPurchase else {
-                    errorMessage = "Product not available"
+                    errorMessage = "Product not available - please try again"
                     showError = true
+                    print("❌ Product is nil!")
                     return
                 }
                 
+                print("💳 Starting purchase for: \(product.displayName)")
                 let success = try await storeManager.purchase(product)
+                
                 if success {
+                    print("✅ Purchase successful!")
                     onComplete()
+                } else {
+                    print("⚠️ Purchase returned false")
+                    errorMessage = "Purchase was cancelled or pending"
+                    showError = true
                 }
             } catch {
+                print("❌ Purchase failed: \(error.localizedDescription)")
                 errorMessage = error.localizedDescription
                 showError = true
             }
         }
     }
+
 }
 
 // MARK: - Plan Card

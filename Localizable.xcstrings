@@ -171,16 +171,16 @@
     },
     "Billed %@%@" : {
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Billed %1$@%2$@"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abgerechnet %1$@%2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Billed %1$@%2$@"
           }
         },
         "es" : {
@@ -427,7 +427,11 @@
         }
       }
     },
+    "Enter the 6-digit code sent to\n%@" : {
+
+    },
     "Enter the 6-digit code sent to\\n%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -735,7 +739,11 @@
         }
       }
     },
+    "Open Safari and browse YouTube\nto see your ad blocker in action" : {
+
+    },
     "Open Safari and browse YouTube\\nto see your ad blocker in action" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1043,7 +1051,11 @@
         }
       }
     },
+    "Sign in or register to use AdBlocker" : {
+
+    },
     "Sign in or register to use AdBlocker\\non multiple devices" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1631,7 +1643,11 @@
         }
       }
     },
+    "Your shield against\nYouTube ads" : {
+
+    },
     "Your shield against\\nYouTube ads" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

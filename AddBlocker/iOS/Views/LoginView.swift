@@ -46,7 +46,7 @@ struct LoginView: View {
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 16)
                         
-                        Text("Sign in or register to use AdBlocker\non multiple devices")
+                        Text("Sign in or register to use AdBlocker")
                             .font(.system(size: 15, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                             .multilineTextAlignment(.center)

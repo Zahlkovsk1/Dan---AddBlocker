@@ -12,7 +12,8 @@ final class StoreManager {
     static let shared = StoreManager()
     
     private let monthlyProductID = "com.fedora.YBlock.premium.monthly"
-    private let yearlyProductID = "com.fedora.YBlock.premium.annual"
+    private let yearlyProductID =  "com.fedora.YBlock.premium.annual"
+
     
     @MainActor var monthlyProduct: Product?
     @MainActor var yearlyProduct: Product?

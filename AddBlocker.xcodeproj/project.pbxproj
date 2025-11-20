@@ -20,6 +20,7 @@
 		6C979FD32EC4845B00A11250 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6C979FD22EC4845B00A11250 /* GoogleSignInSwift */; };
 		6C97A1742ECA616400A11250 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6C97A1732ECA616400A11250 /* Localizable.xcstrings */; };
 		6CA8E2252EC2472C00C537CC /* YBlocker.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6CA8E21C2EC2472C00C537CC /* YBlocker.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6CEF1F8D2ECF525100CE1F02 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CEF1F8C2ECF525100CE1F02 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		6C97A1732ECA616400A11250 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		6CA8E2072EC246CC00C537CC /* YBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA8E21C2EC2472C00C537CC /* YBlocker.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YBlocker.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CEF1F8C2ECF525100CE1F02 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -132,6 +134,7 @@
 				6C979FCE2EC4842100A11250 /* Supabase in Frameworks */,
 				6C979FC32EC47B4200A11250 /* Storage in Frameworks */,
 				6C979FD32EC4845B00A11250 /* GoogleSignInSwift in Frameworks */,
+				6CEF1F8D2ECF525100CE1F02 /* StoreKit.framework in Frameworks */,
 				6C979FC12EC47B4200A11250 /* PostgREST in Frameworks */,
 				6C979FBF2EC47B4200A11250 /* Functions in Frameworks */,
 				6C979FBD2EC47B4200A11250 /* Auth in Frameworks */,
@@ -152,6 +155,7 @@
 		6C979FCC2EC4842100A11250 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CEF1F8C2ECF525100CE1F02 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
