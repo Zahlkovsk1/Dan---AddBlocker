@@ -12,6 +12,7 @@ struct SettingsView: View {
     @Environment(AppState.self) var appState
     @Environment(\.dismiss) private var dismiss
     @State private var username: String = ""
+    @Environment(\.openURL) private var openURL
     
     var body: some View {
         ZStack {
@@ -45,7 +46,9 @@ struct SettingsView: View {
                 
                 VStack(spacing: 16) {
                     Button(action: {
-                       
+                        if let url = URL(string: "https://yoursupportpage.com") {
+                            openURL(url)
+                        }
                     }) {
                         Text("Support")
                             .font(.headline)
