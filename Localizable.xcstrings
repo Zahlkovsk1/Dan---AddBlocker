@@ -1084,6 +1084,7 @@
       }
     },
     "Sign in with Apple" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

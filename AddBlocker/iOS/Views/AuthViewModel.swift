@@ -7,6 +7,7 @@
 import SwiftUI
 import Supabase
 import GoogleSignIn
+import AuthenticationServices
 
 @Observable
 final class AuthViewModel  {
@@ -56,6 +57,44 @@ final class AuthViewModel  {
             await signInWithGoogle(using: SupabaseClient.development)
         }
     }
+    
+  
+
+    func handleAppleSignInCompletion(result: Result<ASAuthorization, Error>) {
+        Task {
+            await signInWithApple(result: result, using: SupabaseClient.development)
+        }
+    }
+
+    private func signInWithApple(result: Result<ASAuthorization, Error>, using supabaseClient: SupabaseClient) async {
+        toggleLoaidngState()
+        defer {
+            toggleLoaidngState()
+        }
+        
+        do {
+            guard case .success(let authorization) = result,
+                  let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
+                  let identityToken = credential.identityToken,
+                  let tokenString = String(data: identityToken, encoding: .utf8) else {
+                throw NSError(domain: "Invalid Apple credentials", code: -1)
+            }
+            
+            try await supabaseClient.auth.signInWithIdToken(
+                credentials: .init(
+                    provider: .apple,
+                    idToken: tokenString
+                )
+            )
+            
+            authResult = .success(())
+            appState.setAuthState(.authenticated)
+            
+        } catch {
+            authResult = .failure(error)
+        }
+    }
+
     
     func handleSingInButtonTapped() {
         guard isValid else {

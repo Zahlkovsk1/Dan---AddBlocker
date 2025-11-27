@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleSignInSwift
+import _AuthenticationServices_SwiftUI
 
 struct LoginView: View {
     @Environment(AppState.self) private var appState
@@ -85,23 +86,13 @@ struct LoginView: View {
                             .padding(.horizontal, 24)
                             .padding(.bottom, 24)
                         
-                        Button(action: {
-                            // TODO: Apple Sign In
-                        }) {
-                            HStack(spacing: 10) {
-                                Image(systemName: "apple.logo")
-                                    .font(.system(size: 18))
-                                Text("Sign in with Apple")
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
-                            }
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(.white)
-                            )
+                        SignInWithAppleButton { request in
+                            request.requestedScopes = [.fullName, .email]
+                        } onCompletion: { result in
+                            viewModel.handleAppleSignInCompletion(result: result)
                         }
+                        .frame(height: 50)
+                        .signInWithAppleButtonStyle(.black)
                         .padding(.horizontal, 24)
                         .padding(.bottom, 12)
                         

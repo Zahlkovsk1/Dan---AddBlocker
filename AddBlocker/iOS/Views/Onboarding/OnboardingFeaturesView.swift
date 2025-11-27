@@ -194,7 +194,6 @@ struct FeatureCardOnboarding: View {
         VStack(spacing: 0) {
             Spacer()
             
-            // Icon with glow effect
             ZStack {
                 Circle()
                     .fill(
