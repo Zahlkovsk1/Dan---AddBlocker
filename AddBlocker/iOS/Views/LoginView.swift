@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleSignInSwift
+import AuthenticationServices
 
 struct LoginView: View {
     @Environment(AppState.self) private var appState
@@ -46,7 +47,7 @@ struct LoginView: View {
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 16)
                         
-                        Text("Sign in or register to use AdBlocker\non multiple devices")
+                        Text("Sign in or register to use AdBlocker")
                             .font(.system(size: 15, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                             .multilineTextAlignment(.center)
@@ -85,21 +86,62 @@ struct LoginView: View {
                             .padding(.horizontal, 24)
                             .padding(.bottom, 24)
                         
+                        // Email login button
                         Button(action: {
-                            // TODO: Apple Sign In
+                            viewModel.handleSingInButtonTapped()
+                        }) {
+                            Text("Sign in")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(.white)
+                                )
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 24)
+                        .disabled(viewModel.isLoading || !viewModel.isValid)
+                        .opacity((viewModel.isLoading || !viewModel.isValid) ? 0.5 : 1)
+                    
+                        HStack {
+                            Rectangle()
+                                .fill(.white.opacity(0.2))
+                                .frame(height: 1)
+                            
+                            Text("continue with")
+                                .font(.system(size: 13, design: .rounded))
+                                .foregroundColor(.white.opacity(0.5))
+                                .padding(.horizontal, 12)
+                            
+                            Rectangle()
+                                .fill(.white.opacity(0.2))
+                                .frame(height: 1)
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 20)
+                        
+                        // Social login buttons
+                        Button(action: {
+                            viewModel.handleAppleSignIn()
                         }) {
                             HStack(spacing: 10) {
                                 Image(systemName: "apple.logo")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 20, weight: .regular))
                                 Text("Sign in with Apple")
                                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                             }
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(.white)
+                                    .fill(.white.opacity(0.12))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.2), lineWidth: 1)
+                                    )
                             )
                         }
                         .padding(.horizontal, 24)
@@ -128,39 +170,22 @@ struct LoginView: View {
                             )
                         }
                         .padding(.horizontal, 24)
-                        .padding(.bottom, 12)
-                        
-                     
-                        Button(action: {
-                            viewModel.handleSingInButtonTapped()
-                        }) {
-                            Text("Sign in with Email")
-                                .font(.system(size: 16, weight: .semibold, design: .rounded))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(.white.opacity(0.12))
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .stroke(.white.opacity(0.2), lineWidth: 1)
-                                        )
-                                )
-                        }
-                        .padding(.horizontal, 24)
-                        .padding(.bottom, 12)
-                        .disabled(viewModel.isLoading || !viewModel.isValid)
-                        .opacity((viewModel.isLoading || !viewModel.isValid) ? 0.5 : 1)
+                        .padding(.bottom, 24)
                   
+                        // Register button
                         Button(action: {
                             viewModel.showSignUp = true
                         }) {
-                            Text("Register")
-                                .font(.system(size: 16, weight: .medium, design: .rounded))
-                                .foregroundColor(.white.opacity(0.7))
+                            HStack(spacing: 4) {
+                                Text("Don't have an account?")
+                                    .font(.system(size: 15, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.6))
+                                Text("Register")
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                    .foregroundColor(.white)
+                            }
                         }
-                        .padding(.top, 12)
+                        .padding(.top, 8)
                         
                         Spacer()
                             .frame(height: 60)
@@ -193,93 +218,240 @@ struct LoginView: View {
 
 struct SignUpView: View {
     @Bindable var viewModel: AuthViewModel
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        VStack {
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(white: 0.08),
+                    Color(white: 0.12),
+                    Color(white: 0.08)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            
             if viewModel.isAwaitingOTP {
-                VStack(spacing: 20) {
-                    Text("Verify Your Email")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    
-                    Text("Enter the 6-digit code sent to\n\(viewModel.pendingEmail)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 20)
-                    
-                    TextField("Enter OTP Code", text: $viewModel.otpCode)
-                        .keyboardType(.numberPad)
-                        .textContentType(.oneTimeCode)
-                        .multilineTextAlignment(.center)
-                        .font(.system(size: 24, weight: .medium))
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                    
-                    Button(action: {
-                        viewModel.handleVerifyOTP()
-   
-                    }) {
-                        Text("Verify")
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Spacer()
+                            .frame(height: 80)
+                        
+                        Image(systemName: "envelope.badge.shield.half.filled")
+                            .font(.system(size: 60))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 30)
+                        
+                        Text("Verify Your Email")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 12)
+                        
+                        Text("Enter the 6-digit code sent to")
+                            .font(.system(size: 15, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                        
+                        Text(viewModel.pendingEmail)
+                            .font(.system(size: 15, weight: .medium, design: .rounded))
+                            .foregroundColor(.white.opacity(0.8))
+                            .padding(.bottom, 40)
+                        
+                        TextField("", text: $viewModel.otpCode, prompt: Text("000000").foregroundColor(.white.opacity(0.5)))
+                            .keyboardType(.numberPad)
+                            .textContentType(.oneTimeCode)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 32, weight: .medium, design: .rounded))
+                            .foregroundColor(.white)
                             .padding()
-                            .background(Color.white)
-                            .cornerRadius(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.08))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.15), lineWidth: 1)
+                                    )
+                            )
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 30)
+                        
+                        Button(action: {
+                            viewModel.handleVerifyOTP()
+                        }) {
+                            Text("Verify")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(.white)
+                                )
+                        }
+                        .padding(.horizontal, 24)
+                        .disabled(viewModel.otpCode.count != 6)
+                        .opacity(viewModel.otpCode.count != 6 ? 0.5 : 1)
+                        
+                        Spacer()
                     }
-                    .padding(.horizontal)
-                    .disabled(viewModel.otpCode.count != 6)
                 }
-                .padding()
                 
             } else {
-                // Sign Up Form
-                TextField("Email", text: $viewModel.userEmail)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.username)
-                    .disableAutocorrection(true)
-                    .textInputAutocapitalization(.never)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-                    .padding(.bottom, 12)
-                
-                SecureField("Password", text: $viewModel.userPassword)
-                    .textContentType(.newPassword)
-                    .padding()
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-                    .padding(.bottom, 24)
-                
-                Spacer()
-                
-                Button(action: {
-                    viewModel.handleSignUpWithOTP()
-                }) {
-                    Text("Sign Up")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(12)
+
+                ScrollView {
+                    VStack(spacing: 0) {
+                        Spacer()
+                            .frame(height: 80)
+                        
+                        Image(systemName: "person.badge.plus")
+                            .font(.system(size: 60))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 30)
+                        
+                        VStack(spacing: 12) {
+                            Text("Create Account")
+                                .font(.system(size: 28, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                        }
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 16)
+                        
+                        Text("Sign up to start using YBlock")
+                            .font(.system(size: 15, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 40)
+                        
+                        TextField("", text: $viewModel.userEmail, prompt: Text("Email").foregroundColor(.white.opacity(0.5)))
+                            .keyboardType(.emailAddress)
+                            .textContentType(.username)
+                            .disableAutocorrection(true)
+                            .textInputAutocapitalization(.never)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.08))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.15), lineWidth: 1)
+                                    )
+                            )
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 12)
+                        
+                        SecureField("", text: $viewModel.userPassword, prompt: Text("Password").foregroundColor(.white.opacity(0.5)))
+                            .textContentType(.newPassword)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.08))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.15), lineWidth: 1)
+                                    )
+                            )
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 24)
+                        
+                        Button(action: {
+                            viewModel.handleSignUpWithOTP()
+                        }) {
+                            Text("Sign Up")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(.white)
+                                )
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 16)
+                        .disabled(!viewModel.isValid)
+                        .opacity(!viewModel.isValid ? 0.5 : 1)
+                        
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            HStack(spacing: 4) {
+                                Text("Already have an account?")
+                                    .font(.system(size: 15, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.6))
+                                Text("Sign In")
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .padding(.top, 8)
+                        
+                        Spacer()
+                            .frame(height: 60)
+                    }
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 12)
-                .disabled(!viewModel.isValid)
+            }
+            
+            if viewModel.isLoading {
+                ZStack {
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                    
+                    ProgressView()
+                        .tint(.white)
+                        .scaleEffect(1.2)
+                }
             }
         }
-        .navigationTitle("Register")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
+        .tint(.white)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.isAwaitingOTP ? "Verification" : "Register")
+                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                    .foregroundColor(.white)
+            }
+        }
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(Color(white: 0.08).opacity(0.95), for: .navigationBar)
         .alert("Verification", isPresented: $viewModel.isShowingAllert) {
             Button("OK", role: .cancel) {}
         } message: {
             Text(viewModel.alertMessage)
         }
-        
     }
 }
+
+
+extension AuthViewModel: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func handleAppleSignIn() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            handleAppleSignInCompletion(result: .success(authorization))
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        handleAppleSignInCompletion(result: .failure(error))
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow } ?? UIWindow()
+    }
+}
+

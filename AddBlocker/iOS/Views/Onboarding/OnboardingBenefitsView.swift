@@ -19,7 +19,6 @@ struct OnboardingBenefitsView: View {
     
     var body: some View {
         ZStack {
-            // Monochrome Gradient Background
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color(white: 0.08),
@@ -36,7 +35,6 @@ struct OnboardingBenefitsView: View {
                     Spacer()
                         .frame(height: 60)
                     
-                    // Main Title
                     VStack(spacing: 12) {
                         Text("Block All")
                             .font(.system(size: 38, weight: .bold, design: .rounded))
@@ -44,7 +42,7 @@ struct OnboardingBenefitsView: View {
                             .opacity(showContent ? 1 : 0)
                             .offset(y: showContent ? 0 : 20)
                         
-                        Text("YouTube Ads")
+                        Text("Video Ads")
                             .font(.system(size: 38, weight: .bold, design: .rounded))
                             .foregroundColor(.white.opacity(0.9))
                             .opacity(showContent ? 1 : 0)
@@ -54,9 +52,7 @@ struct OnboardingBenefitsView: View {
                     Spacer()
                         .frame(height: 50)
                     
-                    // Visual Comparison
                     VStack(spacing: 24) {
-                        // Toggle Buttons
                         HStack(spacing: 12) {
                             ComparisonButton(
                                 title: "Before",
@@ -81,7 +77,6 @@ struct OnboardingBenefitsView: View {
                         .opacity(showComparison ? 1 : 0)
                         .offset(y: showComparison ? 0 : 20)
                         
-                        // Screenshot Display
                         ZStack {
                             if selectedMode == .before {
                                 BeforeScreenshot()
@@ -106,7 +101,6 @@ struct OnboardingBenefitsView: View {
                     Spacer()
                         .frame(height: 40)
                     
-                    // Bottom Text
                     VStack(spacing: 12) {
                         HStack(spacing: 8) {
                             Image(systemName: "bolt.fill")
@@ -131,8 +125,7 @@ struct OnboardingBenefitsView: View {
                         .offset(y: showComparison ? 0 : 20)
                     }
                     .padding(.bottom, 20)
-                    
-                    // Continue Button
+                
                     Button(action: {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                             onContinue()
@@ -217,7 +210,6 @@ struct ComparisonButton: View {
 struct BeforeScreenshot: View {
     var body: some View {
         VStack(spacing: 16) {
-            // Add your "before" screenshot here
             Image("youtube-before")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -228,7 +220,6 @@ struct BeforeScreenshot: View {
                 )
                 .shadow(color: .black.opacity(0.3), radius: 20)
             
-            // Caption
             HStack(spacing: 8) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 14))
@@ -242,12 +233,11 @@ struct BeforeScreenshot: View {
     }
 }
 
-// MARK: - After Screenshot (No Ads)
+// MARK: - After Screenshot
 struct AfterScreenshot: View {
     var body: some View {
         VStack(spacing: 16) {
-            // Add your "after" screenshot here
-            Image("youtube-after") // Replace with your asset name
+            Image("youtube-after")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -257,7 +247,6 @@ struct AfterScreenshot: View {
                 )
                 .shadow(color: .green.opacity(0.2), radius: 20)
             
-            // Caption
             HStack(spacing: 8) {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.system(size: 14))

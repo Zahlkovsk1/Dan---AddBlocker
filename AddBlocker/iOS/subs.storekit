@@ -9,7 +9,7 @@
       }
     ]
   },
-  "identifier" : "41073CD1",
+  "identifier" : "61AC76A9",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -17,7 +17,10 @@
 
   ],
   "settings" : {
+    "_applicationInternalID" : "6755256321",
+    "_developerTeamID" : "SP96A7HF6V",
     "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 785144921.204772,
     "_storeKitErrors" : [
       {
         "current" : null,
@@ -68,12 +71,40 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "BCCE6C8D",
+      "id" : "21832544",
       "localizations" : [
 
       ],
-      "name" : "YBlock Premium ",
+      "name" : "YBlock Premium",
       "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "8.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6755352113",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "YBlock - 1 year subscription ",
+              "displayName" : "YBlock annual ",
+              "locale" : "en_GB"
+            }
+          ],
+          "productID" : "com.fedora.YBlock.premium.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annual Premium",
+          "subscriptionGroupID" : "21832544",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
         {
           "adHocOffers" : [
 
@@ -84,19 +115,19 @@
           "displayPrice" : "0.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "D0246AEB",
+          "internalID" : "6755302149",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "",
-              "locale" : "en_US"
+              "description" : "1-month of YBlock premium subscription ",
+              "displayName" : "YBlock - 1 month  ",
+              "locale" : "en_GB"
             }
           ],
           "productID" : "com.fedora.YBlock.premium.monthly",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Monthly Premium ",
-          "subscriptionGroupID" : "BCCE6C8D",
+          "referenceName" : "Monthly Premium",
+          "subscriptionGroupID" : "21832544",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
 

@@ -12,6 +12,7 @@ struct SettingsView: View {
     @Environment(AppState.self) var appState
     @Environment(\.dismiss) private var dismiss
     @State private var username: String = ""
+    @Environment(\.openURL) private var openURL
     
     var body: some View {
         ZStack {
@@ -45,7 +46,9 @@ struct SettingsView: View {
                 
                 VStack(spacing: 16) {
                     Button(action: {
-                       
+                        if let url = URL(string: "https://mamadaliev.com") {
+                            openURL(url)
+                        }
                     }) {
                         Text("Support")
                             .font(.headline)
@@ -85,7 +88,7 @@ struct SettingsView: View {
                         .foregroundColor(.secondary)
                     
                     HStack(spacing: 4) {
-                        Link("Privacy Policy", destination: URL(string: "https://mamadaliev.com/")!)
+                        Link("Privacy Policy", destination: URL(string: "https://mamadaliev.com/privacy-policy")!)
                             .font(.caption)
                             .foregroundColor(.primary)
                         
@@ -93,7 +96,7 @@ struct SettingsView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Link("Terms & Conditions", destination: URL(string: "https://mamadaliev.com/")!)
+                        Link("Terms & Conditions", destination: URL(string: "https://mamadaliev.com/privacy-policy")!)
                             .font(.caption)
                             .foregroundColor(.primary)
                     }

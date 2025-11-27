@@ -1,16 +1,5 @@
-//
-//  PayWallView.swift
-//  AddBlocker
-//
-//  Created by Gabons on 12/11/25.
-//
-//
-//  OnboardingPaywallView.swift
-//  YBlock
-//
-//  Created by Gabons on 14/11/25.
-//
 
+//  Created by Gabons on 14/11/25.
 import SwiftUI
 import StoreKit
 
@@ -20,23 +9,16 @@ struct OnboardingPaywallView: View {
     @State private var selectedPlan: SubscriptionPlan = .yearly
     @State private var showError = false
     @State private var errorMessage = ""
+    @Environment(\.openURL) private var openURL
     
     var onComplete: () -> Void
     
     enum SubscriptionPlan {
         case monthly, yearly
-        
-        var price: String {
-            switch self {
-            case .monthly: return "$0.99"
-            case .yearly: return "$9.99"
-            }
-        }
-        
         var perMonth: String {
             switch self {
-            case .monthly: return "$0.99/mo"
-            case .yearly: return "$0.83/mo"
+            case .monthly: return "/month"
+            case .yearly: return "/year"
             }
         }
         
@@ -55,9 +37,17 @@ struct OnboardingPaywallView: View {
         }
     }
     
+    func priceFor(_ plan: SubscriptionPlan) -> String {
+        switch plan {
+        case .monthly:
+            return storeManager.monthlyProduct?.displayPrice ?? "$0.99"
+        case .yearly:
+            return storeManager.yearlyProduct?.displayPrice ?? "$8.99"
+        }
+    }
+    
     var body: some View {
         ZStack {
-            // Monochrome Gradient Background
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color(white: 0.08),
@@ -102,7 +92,6 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 32)
                     
-                    // Title
                     VStack(spacing: 12) {
                         Text("Start Your")
                             .font(.system(size: 17, weight: .medium, design: .rounded))
@@ -112,7 +101,7 @@ struct OnboardingPaywallView: View {
                             .font(.system(size: 38, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
-                        Text("Block all YouTube ads instantly")
+                        Text("Block all Video ads instantly")
                             .font(.system(size: 15, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                             .multilineTextAlignment(.center)
@@ -124,10 +113,10 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 40)
                     
-                    // Subscription Plans
                     VStack(spacing: 12) {
                         PlanCard(
                             plan: .yearly,
+                            price: priceFor(.yearly),
                             isSelected: selectedPlan == .yearly
                         ) {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -137,6 +126,7 @@ struct OnboardingPaywallView: View {
                         
                         PlanCard(
                             plan: .monthly,
+                            price: priceFor(.monthly),
                             isSelected: selectedPlan == .monthly
                         ) {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -151,7 +141,6 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 32)
                     
-                    // What's Included
                     VStack(alignment: .leading, spacing: 16) {
                         Text("What's Included")
                             .font(.system(size: 15, weight: .semibold, design: .rounded))
@@ -187,14 +176,13 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 40)
                     
-                    // Trial Info
                     VStack(spacing: 8) {
                         HStack(spacing: 6) {
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 13))
                                 .foregroundColor(.green)
                             
-                            Text("Billed \(selectedPlan.price)/\(selectedPlan == .yearly ? "year" : "month")")
+                            Text("Billed \(priceFor(selectedPlan))\(selectedPlan.perMonth)")
                                 .font(.system(size: 13, design: .rounded))
                         }
                         .foregroundColor(.white.opacity(0.6))
@@ -208,7 +196,6 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 24)
                     
-                    // Subscribe Button
                     Button(action: handleSubscribe) {
                         HStack(spacing: 12) {
                             if storeManager.isLoading {
@@ -234,7 +221,9 @@ struct OnboardingPaywallView: View {
                                 )
                         )
                     }
-                    .disabled(storeManager.isLoading || storeManager.monthlyProduct == nil)
+                    .disabled(storeManager.isLoading ||
+                              storeManager.monthlyProduct == nil ||
+                              storeManager.yearlyProduct == nil)
                     .padding(.horizontal, 24)
                     .opacity(showContent ? 1 : 0)
                     .scaleEffect(showContent ? 1 : 0.9)
@@ -242,10 +231,13 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 20)
                     
-                    // Legal Links
                     HStack(spacing: 16) {
                         Button("Terms of Use") {
-                            // Open terms
+                            Button("Privacy Policy") {
+                                if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
+                                    openURL(url)
+                                }
+                            }
                         }
                         .font(.system(size: 12, design: .rounded))
                         .foregroundColor(.white.opacity(0.5))
@@ -254,7 +246,9 @@ struct OnboardingPaywallView: View {
                             .foregroundColor(.white.opacity(0.3))
                         
                         Button("Privacy Policy") {
-                            // Open privacy
+                            if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
+                                openURL(url)
+                            }
                         }
                         .font(.system(size: 12, design: .rounded))
                         .foregroundColor(.white.opacity(0.5))
@@ -293,31 +287,59 @@ struct OnboardingPaywallView: View {
     }
     
     func handleSubscribe() {
+        print("🛒 Purchase started for: \(selectedPlan.title)")
+        
         Task {
             do {
-                // Both options purchase the same monthly subscription
-                let success = try await storeManager.purchase()
+                let productToPurchase: Product?
+                
+                switch selectedPlan {
+                case .monthly:
+                    productToPurchase = storeManager.monthlyProduct
+                    print("📦 Purchasing monthly: \(productToPurchase?.displayName ?? "NIL")")
+                case .yearly:
+                    productToPurchase = storeManager.yearlyProduct
+                    print("📦 Purchasing yearly: \(productToPurchase?.displayName ?? "NIL")")
+                }
+                
+                guard let product = productToPurchase else {
+                    errorMessage = "Product not available - please try again"
+                    showError = true
+                    print("❌ Product is nil!")
+                    return
+                }
+                
+                print("💳 Starting purchase for: \(product.displayName)")
+                let success = try await storeManager.purchase(product)
+                
                 if success {
+                    print("✅ Purchase successful!")
                     onComplete()
+                } else {
+                    print("⚠️ Purchase returned false")
+                    errorMessage = "Purchase was cancelled or pending"
+                    showError = true
                 }
             } catch {
+                print("❌ Purchase failed: \(error.localizedDescription)")
                 errorMessage = error.localizedDescription
                 showError = true
             }
         }
     }
+
 }
 
 // MARK: - Plan Card
 struct PlanCard: View {
     let plan: OnboardingPaywallView.SubscriptionPlan
+    let price: String
     let isSelected: Bool
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
             HStack(spacing: 16) {
-                // Selection Indicator
                 ZStack {
                     Circle()
                         .stroke(.white.opacity(0.3), lineWidth: 2)
@@ -330,7 +352,6 @@ struct PlanCard: View {
                     }
                 }
                 
-                // Plan Info
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 8) {
                         Text(plan.title)
@@ -357,8 +378,7 @@ struct PlanCard: View {
                 
                 Spacer()
                 
-                // Price
-                Text(plan.price)
+                Text(price)
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
             }
@@ -395,3 +415,4 @@ struct IncludedFeature: View {
         }
     }
 }
+
