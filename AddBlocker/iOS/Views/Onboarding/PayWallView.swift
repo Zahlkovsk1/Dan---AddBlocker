@@ -9,6 +9,7 @@ struct OnboardingPaywallView: View {
     @State private var selectedPlan: SubscriptionPlan = .yearly
     @State private var showError = false
     @State private var errorMessage = ""
+    @Environment(\.openURL) private var openURL
     
     var onComplete: () -> Void
     
@@ -232,7 +233,11 @@ struct OnboardingPaywallView: View {
                     
                     HStack(spacing: 16) {
                         Button("Terms of Use") {
-                            // Open terms
+                            Button("Privacy Policy") {
+                                if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
+                                    openURL(url)
+                                }
+                            }
                         }
                         .font(.system(size: 12, design: .rounded))
                         .foregroundColor(.white.opacity(0.5))
@@ -241,7 +246,9 @@ struct OnboardingPaywallView: View {
                             .foregroundColor(.white.opacity(0.3))
                         
                         Button("Privacy Policy") {
-                            // Open privacy
+                            if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
+                                openURL(url)
+                            }
                         }
                         .font(.system(size: 12, design: .rounded))
                         .foregroundColor(.white.opacity(0.5))
