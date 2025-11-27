@@ -85,6 +85,9 @@
         }
       }
     },
+    "000000" : {
+
+    },
     "Activity Monitor" : {
       "localizations" : {
         "de" : {
@@ -112,6 +115,9 @@
           }
         }
       }
+    },
+    "Already have an account?" : {
+
     },
     "and" : {
       "localizations" : {
@@ -231,7 +237,11 @@
         }
       }
     },
+    "Block all Video ads instantly" : {
+
+    },
     "Block all YouTube ads instantly" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -371,6 +381,15 @@
         }
       }
     },
+    "continue with" : {
+
+    },
+    "Create Account" : {
+
+    },
+    "Don't have an account?" : {
+
+    },
     "Email" : {
       "localizations" : {
         "de" : {
@@ -400,6 +419,7 @@
       }
     },
     "Enter OTP Code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -427,7 +447,7 @@
         }
       }
     },
-    "Enter the 6-digit code sent to\n%@" : {
+    "Enter the 6-digit code sent to" : {
 
     },
     "Enter the 6-digit code sent to\\n%@" : {
@@ -1051,6 +1071,12 @@
         }
       }
     },
+    "Sign in" : {
+
+    },
+    "Sign In" : {
+
+    },
     "Sign in or register to use AdBlocker" : {
 
     },
@@ -1084,7 +1110,6 @@
       }
     },
     "Sign in with Apple" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1113,6 +1138,7 @@
       }
     },
     "Sign in with Email" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -1195,6 +1221,9 @@
           }
         }
       }
+    },
+    "Sign up to start using YBlock" : {
+
     },
     "Start Blocking Ads" : {
       "localizations" : {
@@ -1420,6 +1449,9 @@
         }
       }
     },
+    "Video Ads" : {
+
+    },
     "Welcome to" : {
       "localizations" : {
         "de" : {
@@ -1644,7 +1676,7 @@
         }
       }
     },
-    "Your shield against\nYouTube ads" : {
+    "Your shield against\nSafari ads" : {
 
     },
     "Your shield against\\nYouTube ads" : {
@@ -1705,6 +1737,7 @@
       }
     },
     "YouTube Ads" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

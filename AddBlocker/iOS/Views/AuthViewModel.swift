@@ -10,7 +10,7 @@ import GoogleSignIn
 import AuthenticationServices
 
 @Observable
-final class AuthViewModel  {
+final class AuthViewModel : NSObject {
     var showSignUp = false
     var userEmail: String = ""
     var userPassword: String = ""
