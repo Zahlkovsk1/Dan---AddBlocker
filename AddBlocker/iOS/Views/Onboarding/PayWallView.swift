@@ -101,7 +101,7 @@ struct OnboardingPaywallView: View {
                             .font(.system(size: 38, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
-                        Text("Block all YouTube ads instantly")
+                        Text("Block all Video ads instantly")
                             .font(.system(size: 15, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                             .multilineTextAlignment(.center)

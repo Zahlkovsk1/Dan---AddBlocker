@@ -42,7 +42,7 @@ struct OnboardingBenefitsView: View {
                             .opacity(showContent ? 1 : 0)
                             .offset(y: showContent ? 0 : 20)
                         
-                        Text("YouTube Ads")
+                        Text("Video Ads")
                             .font(.system(size: 38, weight: .bold, design: .rounded))
                             .foregroundColor(.white.opacity(0.9))
                             .opacity(showContent ? 1 : 0)

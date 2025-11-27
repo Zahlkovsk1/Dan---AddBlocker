@@ -49,7 +49,7 @@ struct OnboardingWelcomeView: View {
                         .opacity(showContent ? 1 : 0)
                         .offset(y: showContent ? 0 : 20)
                     
-                    Text("Your shield against\nYouTube ads")
+                    Text("Your shield against\nSafari ads")
                         .font(.system(size: 18, weight: .regular, design: .rounded))
                         .foregroundColor(.white.opacity(0.7))
                         .multilineTextAlignment(.center)
