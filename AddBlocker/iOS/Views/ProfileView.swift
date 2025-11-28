@@ -96,7 +96,7 @@ struct SettingsView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Link("Terms & Conditions", destination: URL(string: "https://mamadaliev.com/privacy-policy")!)
+                        Link("Terms & Conditions", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
                             .font(.caption)
                             .foregroundColor(.primary)
                     }

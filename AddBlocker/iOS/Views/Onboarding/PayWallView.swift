@@ -233,8 +233,8 @@ struct OnboardingPaywallView: View {
                     
                     HStack(spacing: 16) {
                         Button("Terms of Use") {
-                            Button("Privacy Policy") {
-                                if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
+                            Button("Terms of Use") {
+                                if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
                                     openURL(url)
                                 }
                             }
