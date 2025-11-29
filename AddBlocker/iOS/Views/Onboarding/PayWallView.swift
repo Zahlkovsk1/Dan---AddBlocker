@@ -25,7 +25,7 @@ struct OnboardingPaywallView: View {
         var savings: String? {
             switch self {
             case .monthly: return nil
-            case .yearly: return "Save 16%"
+            case .yearly: return "Save 15%"
             }
         }
         
@@ -150,7 +150,7 @@ struct OnboardingPaywallView: View {
                         VStack(spacing: 12) {
                             IncludedFeature(
                                 icon: "bolt.fill",
-                                text: "Block all YouTube ads instantly"
+                                text: "Block all Video ads instantly"
                             )
                             
                             IncludedFeature(
