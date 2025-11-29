@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct OnboardingFeaturesView: View {
     @State private var showTitle = false
     @State private var selectedFeature = 0
@@ -51,108 +50,113 @@ struct OnboardingFeaturesView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                Spacer()
-                    .frame(height: 60)
-                
-                VStack(spacing: 8) {
-                    Text("Why Choose")
-                        .font(.system(size: 17, weight: .medium, design: .rounded))
-                        .foregroundColor(.white.opacity(0.6))
-                        .opacity(showTitle ? 1 : 0)
-                        .offset(y: showTitle ? 0 : 20)
+            ScrollView {
+                VStack(spacing: 0) {
+                    Spacer()
+                        .frame(height: 60)
                     
-                    Text("YBlocker?")
-                        .font(.system(size: 36, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                        .opacity(showTitle ? 1 : 0)
-                        .offset(y: showTitle ? 0 : 20)
-                }
-                
-                Spacer()
-                    .frame(height: 50)
-                
-                TabView(selection: $selectedFeature) {
-                    ForEach(0..<features.count, id: \.self) { index in
-                        FeatureCardOnboarding(feature: features[index])
-                            .tag(index)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .frame(height: 380)
-                
-                HStack(spacing: 8) {
-                    ForEach(0..<features.count, id: \.self) { index in
-                        Circle()
-                            .fill(selectedFeature == index ? Color.white.opacity(0.9) : Color.white.opacity(0.3))
-                            .frame(width: selectedFeature == index ? 8 : 6, height: selectedFeature == index ? 8 : 6)
-                            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedFeature)
-                    }
-                }
-                .padding(.top, 20)
-                
-                Spacer()
-                
-                HStack(spacing: 16) {
-                    ForEach(features, id: \.title) { feature in
-                        VStack(spacing: 6) {
-                            Image(systemName: feature.icon)
-                                .font(.system(size: 18))
-                                .foregroundColor(.white.opacity(0.8))
-                            
-                            Text(feature.title)
-                                .font(.system(size: 12, weight: .medium, design: .rounded))
-                                .foregroundColor(.white.opacity(0.7))
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                }
-                .padding(.horizontal, 32)
-                .padding(.vertical, 20)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(.white.opacity(0.05))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.white.opacity(0.12), lineWidth: 1)
-                        )
-                )
-                .padding(.horizontal, 32)
-                .opacity(showButton ? 1 : 0)
-                .offset(y: showButton ? 0 : 20)
-                
-                Spacer()
-                    .frame(height: 24)
-                
-                Button(action: {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
-                        onContinue()
-                    }
-                }) {
-                    HStack(spacing: 12) {
-                        Text("Start Blocking Ads")
-                            .font(.system(size: 17, weight: .semibold, design: .rounded))
+                    VStack(spacing: 8) {
+                        Text("Why Choose")
+                            .font(.system(size: 17, weight: .medium, design: .rounded))
+                            .foregroundColor(.white.opacity(0.6))
+                            .opacity(showTitle ? 1 : 0)
+                            .offset(y: showTitle ? 0 : 20)
                         
-                        Image(systemName: "arrow.right")
-                            .font(.system(size: 16, weight: .semibold))
+                        Text("YBlocker?")
+                            .font(.system(size: 36, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .opacity(showTitle ? 1 : 0)
+                            .offset(y: showTitle ? 0 : 20)
                     }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 18)
+                    
+                    Spacer()
+                        .frame(height: 50)
+                    
+                    TabView(selection: $selectedFeature) {
+                        ForEach(0..<features.count, id: \.self) { index in
+                            FeatureCardOnboarding(feature: features[index])
+                                .tag(index)
+                        }
+                    }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 380)
+                    
+                    HStack(spacing: 8) {
+                        ForEach(0..<features.count, id: \.self) { index in
+                            Circle()
+                                .fill(selectedFeature == index ? Color.white.opacity(0.9) : Color.white.opacity(0.3))
+                                .frame(width: selectedFeature == index ? 8 : 6, height: selectedFeature == index ? 8 : 6)
+                                .animation(.spring(response: 0.3, dampingFraction: 0.7), value: selectedFeature)
+                        }
+                    }
+                    .padding(.top, 20)
+                    
+                    Spacer()
+                        .frame(height: 40)
+                    
+                    HStack(spacing: 16) {
+                        ForEach(features, id: \.title) { feature in
+                            VStack(spacing: 6) {
+                                Image(systemName: feature.icon)
+                                    .font(.system(size: 18))
+                                    .foregroundColor(.white.opacity(0.8))
+                                
+                                Text(feature.title)
+                                    .font(.system(size: 12, weight: .medium, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .padding(.horizontal, 32)
+                    .padding(.vertical, 20)
                     .background(
-                        Capsule()
-                            .fill(.white.opacity(0.15))
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(.white.opacity(0.05))
                             .overlay(
-                                Capsule()
-                                    .stroke(.white.opacity(0.25), lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(.white.opacity(0.12), lineWidth: 1)
                             )
                     )
+                    .padding(.horizontal, 32)
+                    .opacity(showButton ? 1 : 0)
+                    .offset(y: showButton ? 0 : 20)
+                    
+                    Spacer()
+                        .frame(height: 24)
+                    
+                    Button(action: {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                            onContinue()
+                        }
+                    }) {
+                        HStack(spacing: 12) {
+                            Text("Start Blocking Ads")
+                                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                            
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 16, weight: .semibold))
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            Capsule()
+                                .fill(.white.opacity(0.15))
+                                .overlay(
+                                    Capsule()
+                                        .stroke(.white.opacity(0.25), lineWidth: 1)
+                                )
+                        )
+                    }
+                    .padding(.horizontal, 32)
+                    .padding(.bottom, 50)
+                    .opacity(showButton ? 1 : 0)
+                    .scaleEffect(showButton ? 1 : 0.9)
                 }
-                .padding(.horizontal, 32)
-                .padding(.bottom, 50)
-                .opacity(showButton ? 1 : 0)
-                .scaleEffect(showButton ? 1 : 0.9)
             }
+            .scrollIndicators(.hidden)
+            .scrollBounceBehavior(.basedOnSize) // Only scrolls if content exceeds screen
         }
         .onAppear {
             withAnimation(.spring(response: 0.6, dampingFraction: 0.75).delay(0.1)) {
@@ -175,6 +179,7 @@ struct OnboardingFeaturesView: View {
         }
     }
 }
+
 
 
 struct Feature {
