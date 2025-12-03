@@ -139,6 +139,41 @@ struct OnboardingPaywallView: View {
                     .offset(y: showContent ? 0 : 20)
                     
                     Spacer()
+                        .frame(height: 24)
+                    
+                    Button(action: handleSubscribe) {
+                        HStack(spacing: 12) {
+                            if storeManager.isLoading {
+                                ProgressView()
+                                    .tint(.white)
+                            } else {
+                                Text("Start free trial")
+                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
+                                
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 18)
+                        .background(
+                            Capsule()
+                                .fill(.white.opacity(0.2))
+                                .overlay(
+                                    Capsule()
+                                        .stroke(.white.opacity(0.3), lineWidth: 1)
+                                )
+                        )
+                    }
+                    .disabled(storeManager.isLoading ||
+                              storeManager.monthlyProduct == nil ||
+                              storeManager.yearlyProduct == nil)
+                    .padding(.horizontal, 24)
+                    .opacity(showContent ? 1 : 0)
+                    .scaleEffect(showContent ? 1 : 0.9)
+                    
+                    Spacer()
                         .frame(height: 32)
                     
                     VStack(alignment: .leading, spacing: 16) {
@@ -176,67 +211,10 @@ struct OnboardingPaywallView: View {
                     Spacer()
                         .frame(height: 40)
                     
-                    VStack(spacing: 8) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 13))
-                                .foregroundColor(.green)
-                            
-                            Text("Billed \(priceFor(selectedPlan))\(selectedPlan.perMonth)")
-                                .font(.system(size: 13, design: .rounded))
-                        }
-                        .foregroundColor(.white.opacity(0.6))
-                        
-                        Text("Cancel anytime")
-                            .font(.system(size: 12, design: .rounded))
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-                    .opacity(showContent ? 1 : 0)
-                    
-                    Spacer()
-                        .frame(height: 24)
-                    
-                    Button(action: handleSubscribe) {
-                        HStack(spacing: 12) {
-                            if storeManager.isLoading {
-                                ProgressView()
-                                    .tint(.white)
-                            } else {
-                                Text("Continue")
-                                    .font(.system(size: 17, weight: .semibold, design: .rounded))
-                                
-                                Image(systemName: "arrow.right")
-                                    .font(.system(size: 16, weight: .semibold))
-                            }
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
-                        .background(
-                            Capsule()
-                                .fill(.white.opacity(0.2))
-                                .overlay(
-                                    Capsule()
-                                        .stroke(.white.opacity(0.3), lineWidth: 1)
-                                )
-                        )
-                    }
-                    .disabled(storeManager.isLoading ||
-                              storeManager.monthlyProduct == nil ||
-                              storeManager.yearlyProduct == nil)
-                    .padding(.horizontal, 24)
-                    .opacity(showContent ? 1 : 0)
-                    .scaleEffect(showContent ? 1 : 0.9)
-                    
-                    Spacer()
-                        .frame(height: 20)
-                    
                     HStack(spacing: 16) {
                         Button("Terms of Use") {
-                            Button("Terms of Use") {
-                                if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
-                                    openURL(url)
-                                }
+                            if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                                openURL(url)
                             }
                         }
                         .font(.system(size: 12, design: .rounded))
@@ -415,4 +393,5 @@ struct IncludedFeature: View {
         }
     }
 }
+
 

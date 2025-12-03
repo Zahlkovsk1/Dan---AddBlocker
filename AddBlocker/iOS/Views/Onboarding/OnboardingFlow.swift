@@ -38,17 +38,7 @@ struct OnboardingFlow: View {
                 
             case 2:
                 OnboardingFeaturesView {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                        currentPage = 3
-                    }
-                }
-                .transition(.asymmetric(
-                    insertion: .move(edge: .trailing).combined(with: .opacity),
-                    removal: .move(edge: .leading).combined(with: .opacity)
-                ))
-                
-            case 3:
-                OnboardingPaywallView {
+                    // Mark onboarding complete, RouterView will show login
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                         hasCompletedOnboarding = true
                     }
@@ -64,3 +54,4 @@ struct OnboardingFlow: View {
         }
     }
 }
+

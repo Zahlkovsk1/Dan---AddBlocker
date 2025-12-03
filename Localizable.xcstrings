@@ -176,6 +176,7 @@
       }
     },
     "Billed %@%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -297,7 +298,11 @@
         }
       }
     },
+    "Cancel" : {
+
+    },
     "Cancel anytime" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -385,6 +390,12 @@
 
     },
     "Create Account" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Account" : {
 
     },
     "Don't have an account?" : {
@@ -1253,6 +1264,9 @@
         }
       }
     },
+    "Start free trial" : {
+
+    },
     "Start Your" : {
       "localizations" : {
         "de" : {
@@ -1364,6 +1378,9 @@
           }
         }
       }
+    },
+    "This action cannot be undone. All your data will be permanently deleted." : {
+
     },
     "Verification" : {
       "localizations" : {
