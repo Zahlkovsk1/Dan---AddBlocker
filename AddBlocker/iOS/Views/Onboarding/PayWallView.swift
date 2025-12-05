@@ -15,21 +15,22 @@ struct OnboardingPaywallView: View {
     
     enum SubscriptionPlan {
         case monthly, yearly
-        var perMonth: String {
+        
+        var perMonth: LocalizedStringKey {
             switch self {
             case .monthly: return "/month"
             case .yearly: return "/year"
             }
         }
         
-        var savings: String? {
+        var savings: LocalizedStringKey? {
             switch self {
             case .monthly: return nil
-            case .yearly: return "Save 15%"
+            case .yearly: return "Save 25%"
             }
         }
         
-        var title: String {
+        var title: LocalizedStringKey {
             switch self {
             case .monthly: return "Monthly"
             case .yearly: return "Yearly"
@@ -376,7 +377,7 @@ struct PlanCard: View {
 // MARK: - Included Feature
 struct IncludedFeature: View {
     let icon: String
-    let text: String
+    let text: LocalizedStringKey
     
     var body: some View {
         HStack(spacing: 12) {

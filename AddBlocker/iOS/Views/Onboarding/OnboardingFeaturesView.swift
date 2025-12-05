@@ -95,7 +95,7 @@ struct OnboardingFeaturesView: View {
                         .frame(height: 40)
                     
                     HStack(spacing: 16) {
-                        ForEach(features, id: \.title) { feature in
+                        ForEach(features) { feature in
                             VStack(spacing: 6) {
                                 Image(systemName: feature.icon)
                                     .font(.system(size: 18))
@@ -182,11 +182,12 @@ struct OnboardingFeaturesView: View {
 
 
 
-struct Feature {
+struct Feature : Identifiable {
+    let id = UUID()
     let icon: String
-    let title: String
-    let subtitle: String
-    let description: String
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey
+    let description: LocalizedStringKey
     let color: Color
 }
 

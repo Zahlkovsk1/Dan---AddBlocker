@@ -172,8 +172,8 @@ struct HomeView: View {
 // MARK: - Feature Card
 struct FeatureCard: View {
     let icon: String
-    let title: String
-    let description: String
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
     
     var body: some View {
         HStack(spacing: 16) {
