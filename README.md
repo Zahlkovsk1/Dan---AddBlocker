@@ -1,19 +1,20 @@
-<div align="center">
-  <img src="assets/app-icon.png" alt="YBlock Icon" width="120" height="120">
+<p align="center">
+<img src="assets/app-icon.png" alt="YBlock Icon" width="120" height="120">
+<h1 align="center">YBlock</h1>
+<p align="center">Safari Ad Blocker Extension</p>
+</p>
   
-  # YBlock - Safari Ad Blocker Extension
+<p align="center">
+   <img src="assets/Frame 4.png" alt="iOS 18+" height="35" style="margin: 0 12px;">
+   <img src="assets/Frame 5.png" alt="SwiftUI" height="35" style="margin: 0 12px;">
+   <img src="assets/Frame 6.png" alt="JavaScript" height="35" style="margin: 0 12px;">
+   <img src="assets/Frame 7.png" alt="Safari Extension" height="35" style="margin: 0 12px;">
+</p>
   
-  <p>
-    <img src="https://img.shields.io/badge/iOS-17%2B-orange?style=flat-square&logo=apple" alt="iOS 17+">
-    <img src="https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift" alt="SwiftUI">
-    <img src="https://img.shields.io/badge/Swift-5.9-orange?style=flat-square&logo=swift" alt="Swift 5.9">
-    <img src="https://img.shields.io/badge/JavaScript-yellow?style=flat-square&logo=javascript" alt="JavaScript">
-  </p>
-  
-  <p>
-    <a href="YOUR_APP_STORE_LINK_HERE">
-      <img src="https://img.shields.io/badge/Download_on_the-App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" alt="Download on App Store">
-    </a>
+  <p  align="center" >
+   <a href="https://apps.apple.com/it/app/yblock/id6755256321">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" width="140"/>
+</a>
   </p>
   
 ---
