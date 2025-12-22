@@ -67,7 +67,7 @@ struct HomeView: View {
                             .font(.system(size: 36, weight: .bold, design: .rounded))
                             .foregroundColor(.white)
                         
-                        Text("YouTube Ad Protection")
+                        Text("Video Ad Protection")
                             .font(.system(size: 16, weight: .medium, design: .rounded))
                             .foregroundColor(.white.opacity(0.6))
                     }
@@ -172,8 +172,8 @@ struct HomeView: View {
 // MARK: - Feature Card
 struct FeatureCard: View {
     let icon: String
-    let title: String
-    let description: String
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
     
     var body: some View {
         HStack(spacing: 16) {

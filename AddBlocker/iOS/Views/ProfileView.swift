@@ -12,6 +12,7 @@ struct SettingsView: View {
     @Environment(AppState.self) var appState
     @Environment(\.dismiss) private var dismiss
     @State private var username: String = ""
+    @State private var showDeleteConfirmation = false
     @Environment(\.openURL) private var openURL
     
     var body: some View {
@@ -82,6 +83,16 @@ struct SettingsView: View {
                 
                 Spacer()
                 
+                // Delete Account Button - small and separated
+                Button(action: {
+                    showDeleteConfirmation = true
+                }) {
+                    Text("Delete Account")
+                        .font(.caption)
+                        .foregroundColor(.red.opacity(0.8))
+                }
+                .padding(.bottom, 16)
+                
                 VStack(spacing: 8) {
                     Text("By continuing, you agree to")
                         .font(.caption)
@@ -96,7 +107,7 @@ struct SettingsView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        Link("Terms & Conditions", destination: URL(string: "https://mamadaliev.com/privacy-policy")!)
+                        Link("Terms & Conditions", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
                             .font(.caption)
                             .foregroundColor(.primary)
                     }
@@ -108,6 +119,16 @@ struct SettingsView: View {
         .task {
             await getUser()
         }
+        .alert("Delete Account", isPresented: $showDeleteConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                Task {
+                    await deleteAccount()
+                }
+            }
+        } message: {
+            Text("This action cannot be undone. All your data will be permanently deleted.")
+        }
     }
     
     func getUser() async {
@@ -117,6 +138,19 @@ struct SettingsView: View {
         } catch {
             print("Error fetching user: \(error)")
             username = "Guest"
+        }
+    }
+    
+    func deleteAccount() async {
+        do {
+            try await SupabaseEnviromentKey.defaultValue
+                .functions
+                .invoke("swift-handler")
+
+            try await SupabaseEnviromentKey.defaultValue.auth.signOut()
+            dismiss()
+        } catch {
+            print("Error deleting account: \(error)")
         }
     }
 }

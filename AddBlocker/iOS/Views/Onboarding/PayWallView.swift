@@ -15,21 +15,22 @@ struct OnboardingPaywallView: View {
     
     enum SubscriptionPlan {
         case monthly, yearly
-        var perMonth: String {
+        
+        var perMonth: LocalizedStringKey {
             switch self {
             case .monthly: return "/month"
             case .yearly: return "/year"
             }
         }
         
-        var savings: String? {
+        var savings: LocalizedStringKey? {
             switch self {
             case .monthly: return nil
-            case .yearly: return "Save 16%"
+            case .yearly: return "Save 25%"
             }
         }
         
-        var title: String {
+        var title: LocalizedStringKey {
             switch self {
             case .monthly: return "Monthly"
             case .yearly: return "Yearly"
@@ -139,61 +140,6 @@ struct OnboardingPaywallView: View {
                     .offset(y: showContent ? 0 : 20)
                     
                     Spacer()
-                        .frame(height: 32)
-                    
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("What's Included")
-                            .font(.system(size: 15, weight: .semibold, design: .rounded))
-                            .foregroundColor(.white.opacity(0.7))
-                            .padding(.horizontal, 24)
-                        
-                        VStack(spacing: 12) {
-                            IncludedFeature(
-                                icon: "bolt.fill",
-                                text: "Block all YouTube ads instantly"
-                            )
-                            
-                            IncludedFeature(
-                                icon: "shield.fill",
-                                text: "100% privacy protection"
-                            )
-                            
-                            IncludedFeature(
-                                icon: "arrow.clockwise",
-                                text: "Regular updates & improvements"
-                            )
-                            
-                            IncludedFeature(
-                                icon: "checkmark.seal.fill",
-                                text: "Premium support"
-                            )
-                        }
-                        .padding(.horizontal, 24)
-                    }
-                    .opacity(showContent ? 1 : 0)
-                    .offset(y: showContent ? 0 : 20)
-                    
-                    Spacer()
-                        .frame(height: 40)
-                    
-                    VStack(spacing: 8) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 13))
-                                .foregroundColor(.green)
-                            
-                            Text("Billed \(priceFor(selectedPlan))\(selectedPlan.perMonth)")
-                                .font(.system(size: 13, design: .rounded))
-                        }
-                        .foregroundColor(.white.opacity(0.6))
-                        
-                        Text("Cancel anytime")
-                            .font(.system(size: 12, design: .rounded))
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-                    .opacity(showContent ? 1 : 0)
-                    
-                    Spacer()
                         .frame(height: 24)
                     
                     Button(action: handleSubscribe) {
@@ -202,7 +148,7 @@ struct OnboardingPaywallView: View {
                                 ProgressView()
                                     .tint(.white)
                             } else {
-                                Text("Continue")
+                                Text("Start free trial")
                                     .font(.system(size: 17, weight: .semibold, design: .rounded))
                                 
                                 Image(systemName: "arrow.right")
@@ -229,14 +175,47 @@ struct OnboardingPaywallView: View {
                     .scaleEffect(showContent ? 1 : 0.9)
                     
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height: 32)
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("What's Included")
+                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            .foregroundColor(.white.opacity(0.7))
+                            .padding(.horizontal, 24)
+                        
+                        VStack(spacing: 12) {
+                            IncludedFeature(
+                                icon: "bolt.fill",
+                                text: "Block all Video ads instantly"
+                            )
+                            
+                            IncludedFeature(
+                                icon: "shield.fill",
+                                text: "100% privacy protection"
+                            )
+                            
+                            IncludedFeature(
+                                icon: "arrow.clockwise",
+                                text: "Regular updates & improvements"
+                            )
+                            
+                            IncludedFeature(
+                                icon: "checkmark.seal.fill",
+                                text: "Premium support"
+                            )
+                        }
+                        .padding(.horizontal, 24)
+                    }
+                    .opacity(showContent ? 1 : 0)
+                    .offset(y: showContent ? 0 : 20)
+                    
+                    Spacer()
+                        .frame(height: 40)
                     
                     HStack(spacing: 16) {
                         Button("Terms of Use") {
-                            Button("Privacy Policy") {
-                                if let url = URL(string: "https://mamadaliev.com/privacy-policy") {
-                                    openURL(url)
-                                }
+                            if let url = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/") {
+                                openURL(url)
                             }
                         }
                         .font(.system(size: 12, design: .rounded))
@@ -398,7 +377,7 @@ struct PlanCard: View {
 // MARK: - Included Feature
 struct IncludedFeature: View {
     let icon: String
-    let text: String
+    let text: LocalizedStringKey
     
     var body: some View {
         HStack(spacing: 12) {
@@ -415,4 +394,5 @@ struct IncludedFeature: View {
         }
     }
 }
+
 

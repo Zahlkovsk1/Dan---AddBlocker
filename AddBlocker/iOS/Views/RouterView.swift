@@ -42,32 +42,32 @@ struct RouterView: View {
     @Environment(AppState.self) var appState
     @State private var storeManager = StoreManager.shared
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+    @AppStorage("hasSeenPaywall") private var hasSeenPaywall = false
     
     var body: some View {
         ZStack {
             if appState.authState == .loading {
                 loadingView
             }
-            
-            else if !hasCompletedOnboarding && !storeManager.isPremium {
+            else if !hasCompletedOnboarding {
                 OnboardingFlow()
             }
-            else {
-                switch appState.authState {
-                case .authenticated:
+            else if appState.authState == .unauthenticated {
+                LoginView(viewModel: AuthViewModel(appState: appState))
+            }
+            else if appState.authState == .authenticated {
+                if storeManager.isPremium {
                     ContentView()
-                    
-                case .unauthenticated:
-                 
-                    LoginView(viewModel: AuthViewModel(appState: appState))
-                    
-                case .loading:
-                    loadingView
+                } else if !hasSeenPaywall {
+                    OnboardingPaywallView {
+                        hasSeenPaywall = true
+                    }
+                } else {
+                    ContentView() 
                 }
             }
         }
         .task {
-            
             await withTaskGroup(of: Void.self) { group in
                 group.addTask {
                     appState.startAuthListener(supabaseClient: supabaseClient)
@@ -76,17 +76,9 @@ struct RouterView: View {
                     await storeManager.updateSubscriptionStatus()
                 }
             }
-            
-            if storeManager.isPremium && !hasCompletedOnboarding {
-                hasCompletedOnboarding = true
-            }
         }
-        .onChange(of: hasCompletedOnboarding) { oldValue, newValue in
-            if newValue == true && oldValue == false {
-                Task {
-                    await checkInitialAuthState()
-                }
-            }
+        .onDisappear {
+            appState.stopAuthListener()
         }
     }
     
@@ -107,18 +99,7 @@ struct RouterView: View {
                 .tint(.white)
         }
     }
-
-    private func checkInitialAuthState() async {
-        let session = supabaseClient.auth.currentSession
-        
-        await MainActor.run {
-            if session != nil {
-                appState.setAuthState(.authenticated)
-            } else {
-                appState.setAuthState(.unauthenticated)
-            }
-        }
-    }
 }
+
 
 
