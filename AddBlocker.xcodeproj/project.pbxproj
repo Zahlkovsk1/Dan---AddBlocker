@@ -72,13 +72,6 @@
 			);
 			target = 6C7E6AEA2EC3327C003A1DB8 /* YBlocker Youtube */;
 		};
-		6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "YBlock" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 6CA8E2062EC246CC00C537CC /* YBlock */;
-		};
 		6CA8E2262EC2472C00C537CC /* Exceptions for "AdBlockerExtension" folder in "YBlocker" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -103,9 +96,6 @@
 		};
 		6CA8E2092EC246CC00C537CC /* AddBlocker */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6C97A0192EC4C5FF00A11250 /* Exceptions for "AddBlocker" folder in "YBlock" target */,
-			);
 			path = AddBlocker;
 			sourceTree = "<group>";
 		};
