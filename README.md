@@ -1,3 +1,23 @@
+<div align="center">
+  <img src="assets/app-icon.png" alt="YBlock Icon" width="120" height="120">
+  
+  # YBlock - Safari Ad Blocker Extension
+  
+  <p>
+    <img src="https://img.shields.io/badge/iOS-17%2B-orange?style=flat-square&logo=apple" alt="iOS 17+">
+    <img src="https://img.shields.io/badge/SwiftUI-blue?style=flat-square&logo=swift" alt="SwiftUI">
+    <img src="https://img.shields.io/badge/Swift-5.9-orange?style=flat-square&logo=swift" alt="Swift 5.9">
+    <img src="https://img.shields.io/badge/JavaScript-yellow?style=flat-square&logo=javascript" alt="JavaScript">
+  </p>
+  
+  <p>
+    <a href="YOUR_APP_STORE_LINK_HERE">
+      <img src="https://img.shields.io/badge/Download_on_the-App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" alt="Download on App Store">
+    </a>
+  </p>
+  
+---
+
 # YBlock - Safari Ad Blocker Extension
 
 A lightweight and efficient ad blocker extension for Safari, built with Swift and JavaScript to provide a seamless browsing experience free from intrusive advertisements.
