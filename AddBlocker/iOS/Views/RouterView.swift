@@ -49,24 +49,21 @@ struct RouterView: View {
             if appState.authState == .loading {
                 loadingView
             }
-            // Show onboarding first (without paywall)
             else if !hasCompletedOnboarding {
-                OnboardingFlow() // NEW: Only content screens
+                OnboardingFlow()
             }
-            // After onboarding, check authentication
             else if appState.authState == .unauthenticated {
                 LoginView(viewModel: AuthViewModel(appState: appState))
             }
-            // After authentication, check subscription
             else if appState.authState == .authenticated {
                 if storeManager.isPremium {
-                    ContentView() // User has subscription
+                    ContentView()
                 } else if !hasSeenPaywall {
                     OnboardingPaywallView {
                         hasSeenPaywall = true
                     }
                 } else {
-                    ContentView() // User declined paywall, show app anyway
+                    ContentView() 
                 }
             }
         }
