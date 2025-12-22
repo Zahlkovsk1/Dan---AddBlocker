@@ -1,1 +1,1 @@
-# Dan---AddBlocker
+# YBlock - AddBlocker extension for Safari
